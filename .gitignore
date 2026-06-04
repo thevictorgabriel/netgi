@@ -1,0 +1,42 @@
+# ==========================================
+# BACKEND (Flask / Python)
+# ==========================================
+
+# Ignora o ambiente virtual do Python
+backend/venv/
+backend/env/
+backend/ENV/
+
+# Arquivos de cache do Python
+**/__pycache__/
+**.pyc
+**.pyo
+**.pyd
+
+# Variáveis de ambiente sensíveis (Senhas, chaves de API)
+backend/.env
+
+# ==========================================
+# FRONTEND (React Native / Expo / Node)
+# ==========================================
+
+# Pastas de dependências e caches locais do Expo/Claude
+frontend/node_modules/
+frontend/.expo/
+frontend/.claude/
+
+# Arquivos gerados por builds nativos ou temporários
+frontend/dist/
+frontend/web-build/
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+
+# ==========================================
+# SISTEMA OPERACIONAL E IDEs
+# ==========================================
+
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
