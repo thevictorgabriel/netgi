@@ -1,42 +1,25 @@
-# ==========================================
-# BACKEND (Flask / Python)
-# ==========================================
-
-# Ignora o ambiente virtual do Python
+# --- BACKEND (Python / Flask) ---
 backend/venv/
-backend/env/
-backend/ENV/
-
-# Arquivos de cache do Python
-**/__pycache__/
-**.pyc
-**.pyo
-**.pyd
-
-# Variáveis de ambiente sensíveis (Senhas, chaves de API)
+backend/__pycache__/
+backend/*.pyc
+backend/instance/
 backend/.env
 
-# ==========================================
-# FRONTEND (React Native / Expo / Node)
-# ==========================================
+# Bloquear o banco de dados local e uploads de teste dos usuários
+backend/laboratorio.db
+backend/static/uploads/*
+!backend/static/uploads/.gitkeep
 
-# Pastas de dependências e caches locais do Expo/Claude
+# --- FRONTEND (Node / React / Vite) ---
 frontend/node_modules/
-frontend/.expo/
-frontend/.claude/
-
-# Arquivos gerados por builds nativos ou temporários
 frontend/dist/
-frontend/web-build/
-frontend/npm-debug.log*
-frontend/yarn-debug.log*
-frontend/yarn-error.log*
+frontend/dist-ssr
+frontend/*.local
+frontend/.env.local
+frontend/.env.*.local
 
-# ==========================================
-# SISTEMA OPERACIONAL E IDEs
-# ==========================================
-
-.DS_Store
-Thumbs.db
+# --- SISTEMA E IDES ---
 .vscode/
 .idea/
+.DS_Store
+Thumbs.db
