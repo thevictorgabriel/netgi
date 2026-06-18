@@ -1,6 +1,6 @@
-# NETGI ONLINE
+# 💡 NETGI ONLINE
 
-Sistema web full-stack para gerenciamento de laboratório, controle de acesso e moderação de membros. O projeto utiliza autenticação baseada em sessões seguras (Stateful) no backend e uma interface dinâmica e responsiva.
+Plataforma web desenvolvida para o Núcleo de Pesquisa em Economia, Tecnologia, Gestão e Inovação, com o objetivo de centralizar a comunicação e a administração do laboratório. O sistema atua como um portal informativo para a divulgação de atividades e editais abertos, além de oferecer ferramentas de gestão interna. Suas funcionalidades incluem controle de acesso e moderação de membros, gerenciamento do repasse de chaves, mural de avisos e monitoramento em tempo real do status de funcionamento do laboratório (aberto/fechado).
 
 ---
 
@@ -70,7 +70,7 @@ FLASK_ENV=development
 
 ## 2. Configurando o **Frontend**
 
-1. Navegue até o diretório do frontend:
+1. Em outro terminal, navegue até o diretório do frontend:
 ```bash
 cd ../frontend
 ```
