@@ -7,6 +7,7 @@ import { Perfil } from './pages/Perfil/Perfil';
 import { EditarPerfil } from './pages/EditarPerfil/EditarPerfil';
 import { Gerenciar } from './pages/Gerenciar/Gerenciar';
 import { Membros } from './pages/Membros/Membros';
+import { TrocaChave } from './pages/TrocaChave/TrocaChave'; // <- ADICIONADO AQUI
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
       {/* Rotas Protegidas para Usuários Logados */}
       <Route path="/perfil" element={<PrivateRoute><Perfil /></PrivateRoute>} />
       <Route path="/perfil/editar" element={<PrivateRoute><EditarPerfil /></PrivateRoute>} />
+      <Route path="/troca-chave" element={<PrivateRoute><TrocaChave /></PrivateRoute>} /> {/* <- ADICIONADO AQUI */}
       
       {/* Rota Protegida Exclusiva para o Admin */}
       <Route path="/gerenciar" element={<PrivateRoute requerAdmin={true}><Gerenciar /></PrivateRoute>} />
