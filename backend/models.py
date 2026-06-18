@@ -35,3 +35,10 @@ class User(UserMixin, db.Model):
             "role": self.role,
             "status": self.status
         }
+
+# ---TABELA PARA A CHAVE E O LABORATÓRIO ---
+class Lab(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    status = db.Column(db.String(20), default='FECHADO')
+    # Se portador_id for nulo (None), a chave está na Guarita
+    portador_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)

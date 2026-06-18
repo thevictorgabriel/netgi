@@ -4,6 +4,7 @@ backend/__pycache__/
 backend/*.pyc
 backend/instance/
 backend/.env
+backend/criar_admin_copy.py
 
 # Bloquear o banco de dados local e uploads de teste dos usuários
 backend/laboratorio.db

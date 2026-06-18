@@ -4,7 +4,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
-from models import db, User
+from models import db, User, Lab
 from functools import wraps
 from dotenv import load_dotenv
 
@@ -188,6 +188,73 @@ def deletar_membro(id):
     db.session.commit()
     return jsonify({"mensagem": "Membro apagado com sucesso"}), 200
 
+# --- ROTAS DA CHAVE E LABORATÓRIO ---
+
+@app.route('/api/lab', methods=['GET'])
+def get_lab():
+    # Pega o registro do lab, ou cria se não existir
+    lab = Lab.query.first()
+    if not lab:
+        lab = Lab(status='FECHADO', portador_id=None)
+        db.session.add(lab)
+        db.session.commit()
+    
+    nome_portador = "Guarita"
+    is_me = False
+
+    if lab.portador_id:
+        user = User.query.get(lab.portador_id)
+        if user:
+            nome_portador = user.nome
+            if current_user.is_authenticated and current_user.id == user.id:
+                is_me = True
+
+    return jsonify({
+        "status": lab.status,
+        "portador_id": lab.portador_id,
+        "nome_portador": nome_portador,
+        "is_me": is_me # Facilita pro Frontend saber se EU estou com a chave
+    }), 200
+
+@app.route('/api/lab/acao', methods=['POST'])
+@login_required
+def acao_lab():
+    data = request.json
+    acao = data.get('acao')
+    lab = Lab.query.first()
+
+    if acao == 'pegar_guarita':
+        if lab.portador_id is not None:
+            return jsonify({"erro": "A chave não está na guarita"}), 400
+        lab.portador_id = current_user.id
+
+    elif acao == 'devolver_guarita':
+        if lab.portador_id != current_user.id and current_user.role != 'admin':
+            return jsonify({"erro": "Você não está com a chave"}), 403
+        lab.portador_id = None
+        lab.status = 'FECHADO' # Se devolveu na guarita, tranca automático
+
+    elif acao == 'toggle_status':
+        if lab.portador_id != current_user.id:
+            return jsonify({"erro": "Apenas quem está com a chave pode abrir/fechar o lab"}), 403
+        lab.status = 'ABERTO' if lab.status == 'FECHADO' else 'FECHADO'
+
+    elif acao == 'transferir':
+        if lab.portador_id != current_user.id and current_user.role != 'admin':
+            return jsonify({"erro": "Você não está com a chave"}), 403
+        novo_portador_id = data.get('novo_portador_id')
+        lab.portador_id = novo_portador_id
+        # Se transferiu pra alguém, continua aberto se já estivesse aberto
+
+    db.session.commit()
+    return jsonify({"mensagem": "Ação realizada com sucesso"}), 200
+
+@app.route('/api/usuarios/aprovados', methods=['GET'])
+@login_required
+def get_aprovados():
+    # Retorna usuários aprovados, exceto o próprio usuário logado
+    usuarios = User.query.filter(User.status == 'aprovado', User.id != current_user.id).all()
+    return jsonify([{"id": u.id, "nome": u.nome} for u in usuarios]), 200
 
 # Execução do Servidor
 if __name__ == '__main__':
