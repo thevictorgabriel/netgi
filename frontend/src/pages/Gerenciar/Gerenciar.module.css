@@ -1,0 +1,95 @@
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.mainContent {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 4rem 1rem;
+}
+
+.adminPanel {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  max-width: 800px;
+}
+
+.adminPanel h2 {
+  color: #333;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 1rem;
+}
+
+.emptyMessage {
+  color: #777;
+  font-style: italic;
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.userList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.userCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid #eee;
+}
+
+.userData {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.userData strong {
+  font-size: 1.1rem;
+  color: #444;
+}
+
+.userData span {
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.userActions {
+  display: flex;
+  gap: 1rem;
+}
+
+.btnApprove, .btnReject {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.btnApprove {
+  background-color: #1e8e3e;
+  color: white;
+}
+
+.btnReject {
+  background-color: #d93025;
+  color: white;
+}
+
+.btnApprove:hover, .btnReject:hover {
+  opacity: 0.8;
+}

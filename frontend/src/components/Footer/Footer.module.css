@@ -1,0 +1,36 @@
+.footer {
+  background-color: #dfdfdf; /* Cinza claro do background do rodapé */
+  padding: 4rem 5% 1.5rem 5%;
+  margin-top: 4rem;
+  width: 100%;
+}
+
+.columns {
+  display: grid;
+  /* A primeira coluna (NetGi) é um pouco maior que as outras */
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr; 
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.column h3 {
+  font-size: 1.1rem;
+  color: #444;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.column p {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: #666;
+  margin: 0;
+}
+
+.copyright {
+  text-align: center;
+  margin-top: 3rem;
+  font-size: 0.8rem;
+  color: #777;
+}
