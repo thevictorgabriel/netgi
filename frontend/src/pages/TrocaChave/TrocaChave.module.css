@@ -1,0 +1,29 @@
+.pageContainer { display: flex; flex-direction: column; min-height: 100vh; }
+.mainContent { flex: 1; padding: 3rem 1rem; display: flex; justify-content: center; background-color: #f9f9f9; }
+
+.cardInfo { background: white; padding: 2.5rem; border-radius: 12px; width: 100%; max-width: 500px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; }
+.cardInfo h2 { margin-bottom: 1.5rem; color: #333; }
+
+.statusGeral { background: #f0f0f0; padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem; font-size: 1.1rem; }
+.statusGeral p { margin: 0.5rem 0; }
+
+.painelAcoes { display: flex; flex-direction: column; gap: 1rem; }
+
+.minhasAcoes { display: flex; flex-direction: column; gap: 1rem; }
+.divisor { border: 0; height: 1px; background: #ddd; margin: 0.5rem 0; }
+
+.btnPegar, .btnAbrir, .btnFechar, .btnTransferir, .btnDevolver { padding: 0.8rem; border: none; border-radius: 6px; font-size: 1rem; font-weight: bold; cursor: pointer; color: white; transition: 0.2s; }
+
+.btnPegar { background: #1e8e3e; }
+.btnPegar:hover { background: #156c2e; }
+
+.btnAbrir { background: #ff6b00; }
+.btnFechar { background: #333; }
+
+.transferGroup { display: flex; gap: 0.5rem; flex-direction: column; }
+.selectUser { padding: 0.8rem; border: 1px solid #ccc; border-radius: 6px; font-size: 1rem; }
+.btnTransferir { background: #0056b3; }
+
+.btnDevolver { background: #d93025; }
+
+.avisoOcupado { color: #d93025; background: #fce8e6; padding: 1rem; border-radius: 6px; font-weight: 500; }
