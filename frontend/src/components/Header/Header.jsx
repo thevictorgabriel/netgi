@@ -43,7 +43,6 @@ export function Header() {
                 <img src={logoNetgi} alt="Logo NETGI" className={styles.logoImage} style={{ height: '50px', width: 'auto' }} />
             </Link>
             
-            {/* O status agora está DENTRO do navMenu, garantindo que fiquem juntos */}
             <nav className={styles.navMenu} style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
                 
                 {isAuth ? (
@@ -60,11 +59,10 @@ export function Header() {
                     </div>
                 )}
 
-                {/* Links tradicionais do menu */}
                 <Link to="/">Inicial</Link>
-                <Link to="/membros">Membros</Link>
                 <Link to="/editais">Editais e Evento</Link>
                 <Link to="/icetec">ICETec</Link>
+                <Link to="/membros">Membros</Link>
 
                 {role === 'admin' && (
                     <Link to="/gerenciar" className={styles.adminLink}>Gerenciar</Link>

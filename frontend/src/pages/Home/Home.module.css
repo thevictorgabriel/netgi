@@ -1,46 +1,277 @@
 .pageContainer {
-  font-family: 'Inter', 'Segoe UI', sans-serif;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #fafafa;
+  min-height: 100vh;
 }
 
 .mainContent {
   flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 0 5%;
 }
 
-/* Área do título principal */
-.hero {
+/* Helpers Globais para as Seções */
+.bgLight {
+  background-color: #f7f9fa;
+}
+
+.sectionWrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 1rem;
+  width: 100%;
+}
+
+/* SEÇÃO 1: HERO */
+.heroSection {
+  background: linear-gradient(180deg, #ffffff 0%, #f0f4f8 100%);
+  padding: 4rem 1rem;
   text-align: center;
-  margin: 4rem 0 2rem 0;
+}
+
+.heroWrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.mainTitle {
+  font-size: 2.5rem;
+  color: #333;
+  line-height: 1.2;
+}
+
+.letreiroImage {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  object-fit: contain;
+}
+
+.heroText {
+  font-size: 1.2rem;
+  color: #555;
+  line-height: 1.6;
   max-width: 800px;
 }
 
-.hero h1 {
-  font-size: 2.8rem;
-  color: #7a7a7a;
-  line-height: 1.2;
+/* SEÇÃO 2: DETALHES FUNCIONAMENTO */
+.infoSection h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: #1e8e3e;
+  margin-bottom: 1.5rem;
+}
+
+.infoText {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #444;
+  max-width: 900px;
+  margin: 0 auto 3rem auto;
+  line-height: 1.7;
+}
+
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.featureCard {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  text-align: center;
+}
+
+.featureCard h3 {
+  color: #333;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
+.featureCard p {
+  color: #666;
+  line-height: 1.5;
+}
+
+/* CARROSSÉIS (EVENTOS E MEMBROS) */
+.carouselSection {
+  background-color: white;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.sectionHeader h2 {
+  font-size: 2rem;
+  color: #333;
+}
+
+.btnAction {
+  background-color: #0056b3;
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.btnAction:hover {
+  background-color: #004494;
+}
+
+.carouselContainer {
+  display: flex;
+  overflow-x: auto;
+  gap: 1.5rem;
+  padding-bottom: 1.5rem;
+  /* Scroll suave estilo Mobile */
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+}
+
+.carouselContainer::-webkit-scrollbar {
+  height: 8px;
+}
+.carouselContainer::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+/* Cards do Mural de Atividades */
+.atividadeCard {
+  background: white;
+  border: 1px solid #eaeaea;
+  border-radius: 12px;
+  padding: 1.5rem;
+  min-width: 300px;
+  max-width: 300px;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.badge {
+  background: #e8f0fe;
+  color: #1a73e8;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.atividadeCard h4 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.dateInfo {
+  font-size: 0.9rem;
+  color: #777;
+  margin-bottom: 1rem;
+}
+
+.descPreview {
+  font-size: 0.95rem;
+  color: #555;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Cards de Membros */
+.membroCard {
+  background: white;
+  border: 1px solid #eaeaea;
+  border-radius: 12px;
+  padding: 2rem 1rem;
+  min-width: 220px;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.membroFoto {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1rem;
+  border: 3px solid #f0f4f8;
+}
+
+.membroCard h4 {
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.membroCard p {
+  color: #777;
+  font-size: 0.9rem;
+}
+
+/* SEÇÃO 4: ICETEC */
+.icetecLayout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.icetecLogoInline {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
   margin-bottom: 2rem;
 }
 
-.heroBackground {
-  min-height: 250px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* Aqui você pode colocar um background-image ou renderizar o cérebro em 3D */
+.icetecText h2 {
+  font-size: 2.2rem;
+  color: #333;
+  margin-bottom: 1rem;
 }
 
-/* Agrupa os blocos menores como "Projetos de Inovação" e "Empreendedorismo" */
-.subBlocks {
-  display: flex;
-  gap: 2rem;
-  margin: 2rem 0;
-  justify-content: center;
-  flex-wrap: wrap; /* Permite quebrar linha em telas menores */
+.icetecText p {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: #555;
+  margin-bottom: 2rem;
+}
+
+.btnActionIcetec {
+  background-color: #ff6b00;
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.1rem;
+  transition: 0.2s;
+  display: inline-block;
+}
+
+.btnActionIcetec:hover {
+  background-color: #e65c00;
 }
