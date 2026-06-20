@@ -12,7 +12,7 @@ export function Home() {
   const [membros, setMembros] = useState([]);
 
   useEffect(() => {
-    // Busca os eventos para o carrossel (pega os 5 mais recentes)
+    // Busca os eventos para o carrossel
     fetch('http://localhost:5000/api/eventos')
       .then(res => res.ok ? res.json() : [])
       .then(data => setAtividades(data.slice(0, 5)))
@@ -107,7 +107,7 @@ export function Home() {
           </div>
         </section>
 
-        {/* SEÇÃO 5: CARROSSEL DE MEMBROS */}
+        {/* SEÇÃO 5: CARROSSEL CONTÍNUO DE MEMBROS */}
         <section className={styles.carouselSection}>
           <div className={styles.sectionWrapper}>
             <div className={styles.sectionHeader}>
@@ -115,23 +115,27 @@ export function Home() {
               <Link to="/membros" className={styles.btnAction}>Ver Todos os Membros</Link>
             </div>
             
-            <div className={styles.carouselContainer}>
-              {membros.length === 0 ? (
-                <p>Faça login para visualizar os membros.</p>
-              ) : (
-                membros.map(membro => (
-                  <div key={membro.id} className={styles.membroCard}>
-                    <img 
-                      src={membro.foto ? `http://localhost:5000/static/uploads/${membro.foto}` : IconePerfil} 
-                      alt={membro.nome} 
-                      className={styles.membroFoto} 
-                    />
-                    <h4>{membro.nome}</h4>
-                    <p>{membro.curso || 'Membro NETGI'}</p>
-                  </div>
-                ))
-              )}
-            </div>
+            {membros.length === 0 ? (
+              <p>Faça login para visualizar os membros.</p>
+            ) : (
+              <div className={styles.marqueeContainer}>
+                <div className={styles.marqueeTrack}>
+                  {/* Duplicamos a lista para criar a ilusão de rolagem infinita */}
+                  {[...membros, ...membros].map((membro, index) => (
+                    <div key={`${membro.id}-${index}`} className={styles.membroCard}>
+                      <img 
+                        src={membro.foto ? `http://localhost:5000/static/uploads/${membro.foto}` : IconePerfil} 
+                        alt={membro.nome} 
+                        className={styles.membroFoto} 
+                      />
+                      <h4>{membro.nome}</h4>
+                      <p>{membro.curso || 'Membro NETGI'}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
           </div>
         </section>
 

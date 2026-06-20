@@ -275,3 +275,40 @@
 .btnActionIcetec:hover {
   background-color: #e65c00;
 }
+
+/* =========================================
+   CARROSSEL INFINITO (MARQUEE) DE MEMBROS
+   ========================================= */
+
+.marqueeContainer {
+  overflow: hidden; /* Esconde a barra de rolagem horizontal */
+  width: 100%;
+  padding-bottom: 1.5rem;
+  /* Máscara opcional para dar efeito de fade nas pontas (apaga se não gostar) */
+  -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+}
+
+.marqueeTrack {
+  display: flex;
+  gap: 1.5rem;
+  width: max-content;
+  /* Duração de 30s. Mude este valor para deixar mais rápido ou mais devagar */
+  animation: scrollMarquee 30s linear infinite; 
+}
+
+/* Pausa a animação se o usuário colocar o mouse em cima para conseguir ler */
+.marqueeTrack:hover {
+  animation-play-state: paused;
+}
+
+@keyframes scrollMarquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    /* Desloca exatamente a metade do tamanho da trilha duplicada */
+    /* O -0.75rem compensa metade do 'gap' para o loop ficar cirurgicamente perfeito */
+    transform: translateX(calc(-50% - 0.75rem));
+  }
+}
