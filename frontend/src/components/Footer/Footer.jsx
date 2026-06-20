@@ -1,32 +1,40 @@
 import styles from './Footer.module.css';
+import { FaInstagram, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
 
 export function Footer() {
+  const anoAtual = new Date().getFullYear();
+
   return (
     <footer className={styles.footer}>
-      <div className={styles.columns}>
-        <div className={styles.column}>
-          <h3>NetGi</h3>
-          <p>Núcleo Pesquisa de Economia, Tecnologia, Gestão e Inovação...</p>
+      <div className={styles.container}>
+        
+        <div className={styles.brandSection}>
+          <h3>NETGI</h3>
+          <p>
+            Núcleo de Pesquisa em Economia, Tecnologia, Gestão e Inovação. <br />
+            Transformando conhecimento acadêmico em soluções de mercado.
+          </p>
         </div>
-        <div className={styles.column}>
-          <h3>Coordenação</h3>
-          <p>Rute Lopes<br/>Moisés Israel<br/>Rute Lopes</p>
+
+        <div className={styles.contactSection}>
+          <h3>Contato & Redes</h3>
+          <div className={styles.socialIcons}>
+            <a href="https://www.instagram.com/netgiufam/" target="_blank" rel="noreferrer" title="Instagram">
+              <FaInstagram />
+            </a>
+            <a href="mailto:netgi207@gmail.com" title="E-mail">
+              <FaEnvelope />
+            </a>
+          </div>
+          <p className={styles.location}>
+            <FaMapMarkerAlt /> ICET / UFAM - Itacoatiara, AM
+          </p>
         </div>
-        <div className={styles.column}>
-          <h3>Projetos</h3>
-          <p>Café com Ciência<br/>Café com Fofoca<br/>Café com 3M</p>
-        </div>
-        <div className={styles.column}>
-          <h3>Contato</h3>
-          <p>(92) 3533-2200</p>
-        </div>
-        <div className={styles.column}>
-          <h3>Eventos</h3>
-          <p>CONIC 2026</p>
-        </div>
+
       </div>
+      
       <div className={styles.copyright}>
-        <p>Copyright © 2025 NETGI. All Rights Reserved.</p>
+        <p>Copyright &copy; {anoAtual} NETGI. Todos os direitos reservados.</p>
       </div>
     </footer>
   );

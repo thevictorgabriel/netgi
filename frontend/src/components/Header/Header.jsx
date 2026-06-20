@@ -9,6 +9,7 @@ export function Header() {
     const role = localStorage.getItem('@NetGi:role');
     
     const [labData, setLabData] = useState({ status: 'FECHADO', nome_portador: 'Guarita', is_me: false });
+    const [menuOpen, setMenuOpen] = useState(false);
 
     useEffect(() => {
         const fetchLabStatus = async () => {
@@ -39,14 +40,21 @@ export function Header() {
 
     return (
         <header className={styles.header}>
-            <Link to="/" className={styles.logoContainer}>
-                <img src={logoNetgi} alt="Logo NETGI" className={styles.logoImage} style={{ height: '50px', width: 'auto' }} />
-            </Link>
             
-            <nav className={styles.navMenu} style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
-                
+            <div className={styles.leftArea}>
+                <Link to="/" className={styles.logoContainer}>
+                    <img src={logoNetgi} alt="Logo NETGI" className={styles.logoImage} />
+                </Link>
+            </div>
+            
+            {/* O Botão hambúrguer vai para o final porque a rightArea some no mobile */}
+            <button className={styles.hamburgerBtn} onClick={() => setMenuOpen(!menuOpen)}>
+                {menuOpen ? '✖' : '☰'}
+            </button>
+            
+            <nav className={`${styles.centerArea} ${menuOpen ? styles.open : ''}`}>
                 {isAuth ? (
-                    <Link to="/troca-chave" className={styles.labStatus}>
+                    <Link to="/troca-chave" className={styles.labStatus} onClick={() => setMenuOpen(false)}>
                         <span className={isLabOpen ? styles.statusOpen : styles.statusClosed}>
                             {textoStatus}
                         </span>
@@ -59,25 +67,30 @@ export function Header() {
                     </div>
                 )}
 
-                <Link to="/">Inicial</Link>
-                <Link to="/editais">Editais e Evento</Link>
-                <Link to="/icetec">ICETec</Link>
-                <Link to="/membros">Membros</Link>
+                <Link to="/" onClick={() => setMenuOpen(false)}>Inicial</Link>
+                <Link to="/editais" onClick={() => setMenuOpen(false)}>Editais e Eventos</Link>
+                <Link to="/icetec" onClick={() => setMenuOpen(false)}>ICETec</Link>
+                <Link to="/membros" onClick={() => setMenuOpen(false)}>Membros</Link>
 
                 {role === 'admin' && (
-                    <Link to="/gerenciar" className={styles.adminLink}>Gerenciar</Link>
+                    <Link to="/gerenciar" className={styles.adminLink} onClick={() => setMenuOpen(false)}>Gerenciar</Link>
                 )}
+
+                {/* Perfil renderizado DENTRO do menu, visível apenas no mobile */}
+                <div className={styles.mobileProfile}>
+                    <Link to={isAuth ? "/perfil" : "/login"} onClick={() => setMenuOpen(false)}>
+                        <img src={IconePerfil} alt="Perfil" className={styles.profileImg} />
+                    </Link>
+                </div>
             </nav>
 
-            <div className={styles.profile}>
+            {/* Perfil renderizado na direita, visível apenas no desktop */}
+            <div className={styles.rightArea}>
                 <Link to={isAuth ? "/perfil" : "/login"} className={styles.profileBtn}>
-                    <img 
-                        src={IconePerfil} 
-                        alt="Perfil" 
-                        style={{ width: '40px', height: '40px', borderRadius: '50%', objectFit: 'cover' }} 
-                    />
+                    <img src={IconePerfil} alt="Perfil" className={styles.profileImg} />
                 </Link>
             </div>
+
         </header>
     );
 }

@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Header } from '../../components/Header/Header';
 import { Footer } from '../../components/Footer/Footer';
 import styles from './Perfil.module.css';
+import IconePerfil from '../../assets/IconePerfil.png';
 
 export function Perfil() {
   const [usuario, setUsuario] = useState(null);
@@ -50,7 +51,11 @@ export function Perfil() {
       <main className={styles.mainContent}>
         <div className={styles.profileWrapper}>
           <div className={styles.photoSection}>
-            <img src={usuario.foto || "https://via.placeholder.com/250"} alt={usuario.nome} className={styles.profileImage} />
+            <img
+              src={usuario.foto ? `http://localhost:5000/static/uploads/${usuario.foto}` : IconePerfil}
+              alt="Meu Perfil"
+              className={styles.profileImage} /* Mantenha sua classe CSS */
+            />
           </div>
           <div className={styles.infoSection}>
             <div className={styles.headerInfo}>

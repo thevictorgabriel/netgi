@@ -2,11 +2,12 @@ import { useEffect, useState } from 'react';
 import { Header } from '../../components/Header/Header';
 import { Footer } from '../../components/Footer/Footer';
 import styles from './Membros.module.css';
+import IconePerfil from '../../assets/IconePerfil.png';
 
 export function Membros() {
   const [membros, setMembros] = useState([]);
   const [loading, setLoading] = useState(true);
-  
+
   // Verifica se o visitante é o administrador
   const role = localStorage.getItem('@NetGi:role');
   const isAdmin = role === 'admin';
@@ -20,7 +21,7 @@ export function Membros() {
       // Como é pública, não precisa de credentials: 'include' obrigatoriamente, 
       // mas mantemos o padrão fetch limpo.
       const response = await fetch('http://localhost:5000/api/membros');
-      
+
       if (response.ok) {
         const data = await response.json();
         setMembros(data);
@@ -69,20 +70,20 @@ export function Membros() {
             <div className={styles.gridMembros}>
               {membros.map(membro => (
                 <div key={membro.id} className={styles.membroCard}>
-                  
-                  <img 
-                    src={membro.foto || "https://via.placeholder.com/100"} 
-                    alt={membro.nome} 
-                    className={styles.membroFoto}
+
+                  <img
+                    src={membro.foto ? `http://localhost:5000/static/uploads/${membro.foto}` : IconePerfil}
+                    alt={membro.nome}
+                    className={styles.membroFoto} /* Mantenha a classe CSS que você já usava */
                   />
-                  
+
                   <h3 className={styles.membroNome}>
-                    {membro.nome} 
+                    {membro.nome}
                     {membro.role === 'admin' && <span className={styles.badgeAdmin}>Admin</span>}
                   </h3>
-                  
+
                   <p className={styles.membroCurso}>{membro.curso || "Curso não informado"}</p>
-                  
+
                   {membro.bio && <p className={styles.membroBio}>"{membro.bio}"</p>}
 
                   <div className={styles.membroLinks}>
@@ -92,14 +93,14 @@ export function Membros() {
 
                   {/* Renderização Condicional: Só aparece se o visitante for admin e o usuário não for ele mesmo */}
                   {isAdmin && membro.role !== 'admin' && (
-                    <button 
-                      onClick={() => handleDeletar(membro.id, membro.nome)} 
+                    <button
+                      onClick={() => handleDeletar(membro.id, membro.nome)}
                       className={styles.btnDeletar}
                     >
                       Remover Membro
                     </button>
                   )}
-                  
+
                 </div>
               ))}
             </div>

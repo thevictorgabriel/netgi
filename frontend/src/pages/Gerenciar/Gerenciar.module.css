@@ -93,3 +93,47 @@
 .btnApprove:hover, .btnReject:hover {
   opacity: 0.8;
 }
+
+/* =========================================
+   RESPONSIVIDADE - PÁGINA GERENCIAR
+   ========================================= */
+
+@media (max-width: 768px) {
+  /* Força o card a virar uma coluna */
+  .userCard {
+    display: flex;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 1rem;
+    padding: 1.5rem 1rem;
+  }
+
+  /* Garante que os dados (especialmente o e-mail) não quebrem a tela */
+  .userData {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .userData span {
+    word-break: break-all; /* Quebra o e-mail no meio se for muito longo */
+    white-space: normal;
+  }
+
+  /* Faz a área dos botões ocupar a largura inteira do card na parte de baixo */
+  .userActions {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    gap: 0.8rem;
+  }
+
+  /* Estica os botões para dividirem o espaço 50/50 e ficarem fáceis de tocar */
+  .userActions button {
+    flex: 1;
+    padding: 0.8rem 0;
+    margin: 0;
+    font-size: 1rem;
+  }
+}

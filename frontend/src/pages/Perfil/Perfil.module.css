@@ -122,3 +122,53 @@
 
 .linkedin { color: #0066cc; }
 .lattes { color: #333; }
+
+/* Garante que a foto do perfil não estoure */
+.fotoPerfil {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Empilha o perfil no celular */
+@media (max-width: 768px) {
+  .perfilContainer { /* ou a classe que envolve a foto e os dados */
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1.5rem;
+  }
+
+  .botoesAcao {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 0.8rem;
+  }
+}
+
+/* Garante que a foto do perfil não estoure */
+.fotoPerfil {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Empilha o perfil no celular */
+@media (max-width: 768px) {
+  .perfilContainer { /* ou a classe que envolve a foto e os dados */
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1.5rem;
+  }
+
+  .botoesAcao {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 0.8rem;
+  }
+}

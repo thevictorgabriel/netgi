@@ -3,32 +3,136 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background-color: transparent;
+  background-color: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 1000;
 }
 
-.navMenu {
+.leftArea {
+  flex: 1;
   display: flex;
-  gap: 2rem;
+  justify-content: flex-start;
 }
 
-.navMenu a {
+.logoImage {
+  height: 50px;
+  width: auto;
+}
+
+.centerArea {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.centerArea a {
   text-decoration: none;
   color: #333;
   font-weight: 500;
+  transition: color 0.2s;
+  white-space: nowrap;
+}
+
+.centerArea a:hover {
+  color: #0056b3;
+}
+
+.mobileProfile {
+  display: none; /* Escondido no PC */
+}
+
+.rightArea {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .statusOpen {
-  background-color: #ff6b00; /* Laranja da referência "Aberto" */
+  background-color: #1e8e3e;
   color: white;
-  padding: 0.5rem 1.5rem;
+  padding: 0.5rem 1rem;
   border-radius: 20px;
-  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.statusClosed {
+  background-color: #d93025;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.adminLink {
+  color: #ff6b00 !important;
   font-weight: bold;
 }
 
-.profileBtn img {
+.profileImg {
   width: 40px;
   height: 40px;
   border-radius: 50%;
   object-fit: cover;
+  border: 2px solid #eee;
+}
+
+.hamburgerBtn {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #333;
+}
+
+/* RESPONSIVIDADE MOBILE */
+@media (max-width: 1100px) {
+  .hamburgerBtn {
+    display: block;
+  }
+
+  /* Oculta a área direita no celular, fazendo o hambúrguer ir para o fim */
+  .rightArea {
+    display: none; 
+  }
+
+  .centerArea {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    transform: none;
+    width: 100%;
+    flex-direction: column;
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    padding: 2rem 1rem;
+    gap: 1.5rem;
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    transition: clip-path 0.3s ease-in-out;
+  }
+
+  .centerArea.open {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+
+  .centerArea a, .centerArea div {
+    width: 100%;
+    text-align: center;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  /* Mostra a foto de perfil dentro do menu dropdown */
+  .mobileProfile {
+    display: flex;
+    justify-content: center;
+    border-bottom: none; /* Remove a linha do último item */
+    padding-top: 1rem;
+  }
 }
