@@ -23,17 +23,11 @@ export function Header() {
             }
         };
         
-        // Busca a primeira vez ao carregar a página
         fetchLabStatus();
-
-        // Fica "ouvindo" caso alguma outra tela mude o status do laboratório
         window.addEventListener('labStatusChanged', fetchLabStatus);
-
-        // Limpa o ouvinte quando o componente for desmontado
         return () => window.removeEventListener('labStatusChanged', fetchLabStatus);
     }, []);
 
-    // Nova lógica de texto: Mostra o nome sempre, a não ser que esteja na Guarita
     let textoStatus = "";
     if (labData.nome_portador === 'Guarita') {
         textoStatus = "FECHADO (Guarita)";
@@ -49,21 +43,24 @@ export function Header() {
                 <img src={logoNetgi} alt="Logo NETGI" className={styles.logoImage} style={{ height: '50px', width: 'auto' }} />
             </Link>
             
-            {isAuth ? (
-                <Link to="/troca-chave" className={styles.labStatus}>
-                    <span className={isLabOpen ? styles.statusOpen : styles.statusClosed}>
-                        {textoStatus}
-                    </span>
-                </Link>
-            ) : (
-                <div className={styles.labStatus} style={{ cursor: 'default' }}>
-                    <span className={isLabOpen ? styles.statusOpen : styles.statusClosed}>
-                        {textoStatus}
-                    </span>
-                </div>
-            )}
+            {/* O status agora está DENTRO do navMenu, garantindo que fiquem juntos */}
+            <nav className={styles.navMenu} style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
+                
+                {isAuth ? (
+                    <Link to="/troca-chave" className={styles.labStatus}>
+                        <span className={isLabOpen ? styles.statusOpen : styles.statusClosed}>
+                            {textoStatus}
+                        </span>
+                    </Link>
+                ) : (
+                    <div className={styles.labStatus} style={{ cursor: 'default' }}>
+                        <span className={isLabOpen ? styles.statusOpen : styles.statusClosed}>
+                            {textoStatus}
+                        </span>
+                    </div>
+                )}
 
-            <nav className={styles.navMenu}>
+                {/* Links tradicionais do menu */}
                 <Link to="/">Inicial</Link>
                 <Link to="/membros">Membros</Link>
                 <Link to="/editais">Editais e Evento</Link>
