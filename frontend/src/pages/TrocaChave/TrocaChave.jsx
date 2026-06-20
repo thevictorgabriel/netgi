@@ -10,6 +10,9 @@ export function TrocaChave() {
   const [usuarioSelecionado, setUsuarioSelecionado] = useState('');
   const navigate = useNavigate();
 
+  // Pega a permissão do usuário para saber se é admin
+  const role = localStorage.getItem('@NetGi:role');
+
   const carregarDados = async () => {
     try {
       const response = await fetch('http://localhost:5000/api/lab', { credentials: 'include' });
@@ -33,7 +36,6 @@ export function TrocaChave() {
   };
 
   useEffect(() => {
-    // Se não estiver logado, não pode acessar a troca de chaves
     if (!localStorage.getItem('@NetGi:auth')) {
       navigate('/login');
       return;
@@ -52,11 +54,9 @@ export function TrocaChave() {
       });
       
       if (response.ok) {
-        carregarDados(); // Recarrega a tela para mostrar a mudança instantaneamente
-
-        //Avisa o Header para se atualizar
-        window.dispatchEvent(new Event('labStatusChanged'));
-
+        carregarDados(); 
+        window.dispatchEvent(new Event('labStatusChanged')); 
+        
         if (acao === 'devolver_guarita') {
           alert("Chave devolvida e laboratório trancado com sucesso.");
         }
@@ -136,9 +136,22 @@ export function TrocaChave() {
 
             {/* CENÁRIO 3: A chave está com outra pessoa */}
             {!labData.is_me && labData.portador_id !== null && (
-              <p className={styles.avisoOcupado}>
-                Você não pode realizar ações porque a chave está sendo mantida por {labData.nome_portador}.
-              </p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                <p className={styles.avisoOcupado}>
+                  Você não pode realizar ações porque a chave está sendo mantida por {labData.nome_portador}.
+                </p>
+
+                {/* PODER DE ADMIN: Botão extra caso o usuário logado seja admin */}
+                {role === 'admin' && (
+                  <button 
+                    className={styles.btnDevolver} 
+                    style={{ backgroundColor: '#8b0000', marginTop: '10px' }} 
+                    onClick={() => executarAcao('devolver_guarita')}
+                  >
+                    Forçar Devolução para Guarita (Ação Admin)
+                  </button>
+                )}
+              </div>
             )}
           </div>
         </div>
