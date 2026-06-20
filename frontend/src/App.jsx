@@ -7,7 +7,8 @@ import { Perfil } from './pages/Perfil/Perfil';
 import { EditarPerfil } from './pages/EditarPerfil/EditarPerfil';
 import { Gerenciar } from './pages/Gerenciar/Gerenciar';
 import { Membros } from './pages/Membros/Membros';
-import { TrocaChave } from './pages/TrocaChave/TrocaChave'; // <- ADICIONADO AQUI
+import { TrocaChave } from './pages/TrocaChave/TrocaChave';
+import { Editais } from './pages/Editais/Editais';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Route path="/cadastro" element={<Cadastro />} />
 
       <Route path="/membros" element={<Membros />} />
+      <Route path="/editais" element={<Editais />} />
       
       {/* Rotas Protegidas para Usuários Logados */}
       <Route path="/perfil" element={<PrivateRoute><Perfil /></PrivateRoute>} />

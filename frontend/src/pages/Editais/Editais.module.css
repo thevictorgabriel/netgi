@@ -1,0 +1,189 @@
+/* =========================================
+   Layout Principal
+========================================= */
+.pageContainer { 
+    display: flex; 
+    flex-direction: column; 
+    min-height: 100vh; 
+}
+
+.mainContent { 
+    flex: 1; 
+    padding: 3rem 1rem; 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    width: 100%; 
+}
+
+/* =========================================
+   Cabeçalho (Header)
+========================================= */
+.headerSecao { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    margin-bottom: 2rem; 
+    border-bottom: 2px solid #eee; 
+    padding-bottom: 1rem; 
+}
+
+/* =========================================
+   Formulários
+========================================= */
+.formCard { 
+    background: white; 
+    padding: 2rem; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+    margin-bottom: 2rem; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 1rem; 
+}
+
+.inputGroupRow { 
+    display: flex; 
+    gap: 1rem; 
+}
+
+.inputGroupRow input, 
+.inputGroupRow select { 
+    flex: 1; 
+    padding: 0.8rem; 
+    border: 1px solid #ccc; 
+    border-radius: 6px; 
+}
+
+.formCard textarea { 
+    padding: 0.8rem; 
+    border: 1px solid #ccc; 
+    border-radius: 6px; 
+    resize: vertical; 
+}
+
+/* =========================================
+   Grid e Cartões de Evento
+========================================= */
+.gridEventos { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+    gap: 2rem; 
+}
+
+.cardEvento { 
+    background: white; 
+    border-radius: 12px; 
+    overflow: hidden; 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08); 
+    display: flex; 
+    flex-direction: column; 
+}
+
+.imgEvento { 
+    width: 100%; 
+    height: 200px; 
+    object-fit: cover; 
+}
+
+.cardBody { 
+    padding: 1.5rem; 
+    display: flex; 
+    flex-direction: column; 
+    flex: 1; 
+}
+
+.badge { 
+    background: #e8f0fe; 
+    color: #1a73e8; 
+    padding: 0.3rem 0.6rem; 
+    border-radius: 4px; 
+    font-size: 0.8rem; 
+    font-weight: bold; 
+    align-self: flex-start; 
+    margin-bottom: 1rem; 
+}
+
+.cardBody h3 { 
+    margin: 0 0 0.5rem 0; 
+    font-size: 1.3rem; 
+}
+
+.dataTag { 
+    font-size: 0.9rem; 
+    color: #555; 
+    margin-bottom: 1rem; 
+    font-weight: 500; 
+}
+
+.descricao { 
+    color: #666; 
+    font-size: 0.95rem; 
+    line-height: 1.5; 
+    flex: 1; 
+    margin-bottom: 1.5rem; 
+}
+
+/* =========================================
+   Botões e Ações
+========================================= */
+.btnNovo { 
+    background: #0056b3; 
+    color: white; 
+    border: none; 
+    padding: 0.6rem 1.2rem; 
+    border-radius: 6px; 
+    cursor: pointer; 
+    font-weight: bold; 
+}
+
+.btnSalvar { 
+    background: #1e8e3e; 
+    color: white; 
+    border: none; 
+    padding: 1rem; 
+    border-radius: 6px; 
+    font-weight: bold; 
+    cursor: pointer; 
+}
+
+.acoesBase { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    border-top: 1px solid #eee; 
+    padding-top: 1rem; 
+}
+
+.btnLink { 
+    background: #ff6b00; 
+    color: white; 
+    padding: 0.6rem 1rem; 
+    border-radius: 6px; 
+    text-decoration: none; 
+    font-size: 0.9rem; 
+    font-weight: bold; 
+}
+
+.acoesAdmin { 
+    display: flex; 
+    gap: 0.5rem; 
+}
+
+.btnEditar, 
+.btnDeletar { 
+    border: none; 
+    padding: 0.5rem 0.8rem; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    font-size: 0.8rem; 
+    font-weight: bold; 
+    color: white;
+}
+
+.btnEditar { 
+    background: #5f6368; 
+}
+
+.btnDeletar { 
+    background: #d93025; 
+}
