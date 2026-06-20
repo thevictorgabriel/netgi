@@ -9,6 +9,7 @@ import { Gerenciar } from './pages/Gerenciar/Gerenciar';
 import { Membros } from './pages/Membros/Membros';
 import { TrocaChave } from './pages/TrocaChave/TrocaChave';
 import { Editais } from './pages/Editais/Editais';
+import { Icetec } from './pages/Icetec/Icetec';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
 
       <Route path="/membros" element={<Membros />} />
       <Route path="/editais" element={<Editais />} />
+      <Route path="/icetec" element={<Icetec />} />
       
       {/* Rotas Protegidas para Usuários Logados */}
       <Route path="/perfil" element={<PrivateRoute><Perfil /></PrivateRoute>} />
