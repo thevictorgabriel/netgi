@@ -4,7 +4,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
-from models import db, User, Lab
+from models import db, User, Lab, Evento
 from functools import wraps
 from dotenv import load_dotenv
 
@@ -255,6 +255,65 @@ def get_aprovados():
     # Retorna usuários aprovados, exceto o próprio usuário logado
     usuarios = User.query.filter(User.status == 'aprovado', User.id != current_user.id).all()
     return jsonify([{"id": u.id, "nome": u.nome} for u in usuarios]), 200
+
+# --- ROTAS DE EVENTOS E EDITAIS ---
+
+@app.route('/api/eventos', methods=['GET'])
+def get_eventos():
+    # Retorna todos ordenados do mais novo para o mais antigo
+    eventos = Evento.query.order_by(Evento.id.desc()).all()
+    return jsonify([e.to_dict() for e in eventos]), 200
+
+@app.route('/api/eventos', methods=['POST'])
+@login_required
+def salvar_evento():
+    # Como tem imagem, recebemos via form-data em vez de JSON
+    evento_id = request.form.get('id')
+    
+    # Processar o upload da imagem (se houver)
+    imagem_url = request.form.get('imagem_atual', '')
+    if 'imagem' in request.files:
+        file = request.files['imagem']
+        if file.filename != '':
+            filename = secure_filename(file.filename)
+            upload_folder = os.path.join(app.root_path, 'static', 'uploads')
+            os.makedirs(upload_folder, exist_ok=True) # Garante que a pasta existe
+            filepath = os.path.join(upload_folder, filename)
+            file.save(filepath)
+            imagem_url = f"http://localhost:5000/static/uploads/{filename}"
+
+    if evento_id: # Se tem ID, é MODO EDIÇÃO
+        evento = Evento.query.get(evento_id)
+        if not evento: return jsonify({"erro": "Evento não encontrado"}), 404
+        evento.tipo = request.form.get('tipo')
+        evento.titulo = request.form.get('titulo')
+        evento.descricao = request.form.get('descricao')
+        evento.link = request.form.get('link')
+        evento.data_inicio = request.form.get('data_inicio')
+        evento.data_fim = request.form.get('data_fim')
+        evento.horario = request.form.get('horario')
+        if imagem_url: evento.imagem = imagem_url
+    else: # Sem ID, é MODO CRIAÇÃO
+        evento = Evento(
+            tipo=request.form.get('tipo'), titulo=request.form.get('titulo'),
+            descricao=request.form.get('descricao'), link=request.form.get('link'),
+            data_inicio=request.form.get('data_inicio'), data_fim=request.form.get('data_fim'),
+            horario=request.form.get('horario'), imagem=imagem_url, criado_por=current_user.id
+        )
+        db.session.add(evento)
+
+    db.session.commit()
+    return jsonify({"mensagem": "Evento salvo com sucesso!"}), 200
+
+@app.route('/api/eventos/<int:id>', methods=['DELETE'])
+@login_required
+def deletar_evento(id):
+    evento = Evento.query.get(id)
+    if evento:
+        db.session.delete(evento)
+        db.session.commit()
+        return jsonify({"mensagem": "Evento deletado com sucesso!"}), 200
+    return jsonify({"erro": "Evento não encontrado"}), 404
 
 # Execução do Servidor
 if __name__ == '__main__':
