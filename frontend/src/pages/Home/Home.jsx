@@ -108,36 +108,6 @@ export function Home() {
         </section>
 
         {/* SEÇÃO 5: CARROSSEL CONTÍNUO DE MEMBROS */}
-        <section className={styles.carouselSection}>
-          <div className={styles.sectionWrapper}>
-            <div className={styles.sectionHeader}>
-              <h2>Nossa Equipe</h2>
-              <Link to="/membros" className={styles.btnAction}>Ver Todos os Membros</Link>
-            </div>
-            
-            {membros.length === 0 ? (
-              <p>Faça login para visualizar os membros.</p>
-            ) : (
-              <div className={styles.marqueeContainer}>
-                <div className={styles.marqueeTrack}>
-                  {/* Duplicamos a lista para criar a ilusão de rolagem infinita */}
-                  {[...membros, ...membros].map((membro, index) => (
-                    <div key={`${membro.id}-${index}`} className={styles.membroCard}>
-                      <img 
-                        src={membro.foto ? `http://localhost:5000/static/uploads/${membro.foto}` : IconePerfil} 
-                        alt={membro.nome} 
-                        className={styles.membroFoto} 
-                      />
-                      <h4>{membro.nome}</h4>
-                      <p>{membro.curso || 'Membro NETGI'}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-          </div>
-        </section>
 
       </main>
       <Footer />

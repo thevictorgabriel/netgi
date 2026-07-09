@@ -72,7 +72,7 @@ export function Membros() {
                 <div key={membro.id} className={styles.membroCard}>
 
                   <img
-                    src={membro.foto ? `http://localhost:5000/static/uploads/${membro.foto}` : IconePerfil}
+                    src={membro.foto ? (membro.foto.startsWith('http') ? membro.foto : `http://localhost:5000/static/uploads/${membro.foto}`) : IconePerfil}
                     alt={membro.nome}
                     className={styles.membroFoto} /* Mantenha a classe CSS que você já usava */
                   />

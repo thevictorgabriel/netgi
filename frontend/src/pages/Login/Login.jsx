@@ -79,7 +79,7 @@ export function Login() {
             </div>
 
             <div className={styles.forgotPassword}>
-              <a href="#">ESQUECEU A SENHA?</a>
+              {/* <a href="#">ESQUECEU A SENHA?</a> */}
             </div>
 
             <button type="submit" className={styles.submitBtn}>ENTRAR</button>

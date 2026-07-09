@@ -30,23 +30,22 @@
 }
 
 .heroWrapper {
-  max-width: 900px;
+  max-width: 1200px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
 }
 
 .mainTitle {
-  font-size: 2.5rem;
+  font-size: 3rem;
   color: #333;
   line-height: 1.2;
 }
 
 .letreiroImage {
   width: 100%;
-  max-width: 600px;
+  max-width: 800px;
   height: auto;
   object-fit: contain;
 }
@@ -61,7 +60,7 @@
 /* SEÇÃO 2: DETALHES FUNCIONAMENTO */
 .infoSection h2 {
   text-align: center;
-  font-size: 2rem;
+  font-size: 2.5rem;
   color: #1e8e3e;
   margin-bottom: 1.5rem;
 }
@@ -243,7 +242,7 @@
 
 .icetecLogoInline {
   width: 100%;
-  max-width: 300px;
+  max-width: 600px;
   height: auto;
   margin-bottom: 2rem;
 }

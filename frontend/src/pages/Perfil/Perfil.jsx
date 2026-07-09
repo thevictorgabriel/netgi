@@ -52,7 +52,7 @@ export function Perfil() {
         <div className={styles.profileWrapper}>
           <div className={styles.photoSection}>
             <img
-              src={usuario.foto ? `http://localhost:5000/static/uploads/${usuario.foto}` : IconePerfil}
+              src={usuario.foto ? (usuario.foto.startsWith('http') ? usuario.foto : `http://localhost:5000/static/uploads/${usuario.foto}`) : IconePerfil}
               alt="Meu Perfil"
               className={styles.profileImage} /* Mantenha sua classe CSS */
             />

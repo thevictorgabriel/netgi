@@ -10,6 +10,9 @@ export function Header() {
     
     const [labData, setLabData] = useState({ status: 'FECHADO', nome_portador: 'Guarita', is_me: false });
     const [menuOpen, setMenuOpen] = useState(false);
+    
+    // Novo estado para guardar a foto do usuário logado
+    const [userFoto, setUserFoto] = useState(null);
 
     useEffect(() => {
         const fetchLabStatus = async () => {
@@ -23,11 +26,30 @@ export function Header() {
                 console.error("Erro ao buscar status do lab", error);
             }
         };
+
+        // Nova função para buscar os dados do usuário logado
+        const fetchUserProfile = async () => {
+            try {
+                const response = await fetch('http://localhost:5000/api/profile', { credentials: 'include' });
+                if (response.ok) {
+                    const data = await response.json();
+                    setUserFoto(data.foto); // Salva a foto no estado
+                }
+            } catch (error) {
+                console.error("Erro ao buscar perfil no header", error);
+            }
+        };
         
         fetchLabStatus();
+        
+        // Só busca a foto se o usuário estiver autenticado
+        if (isAuth) {
+            fetchUserProfile();
+        }
+
         window.addEventListener('labStatusChanged', fetchLabStatus);
         return () => window.removeEventListener('labStatusChanged', fetchLabStatus);
-    }, []);
+    }, [isAuth]);
 
     let textoStatus = "";
     if (labData.nome_portador === 'Guarita') {
@@ -38,6 +60,11 @@ export function Header() {
 
     const isLabOpen = labData.status === 'ABERTO';
 
+    // Variável para definir o src da imagem com a verificação do link
+    const fotoSrc = userFoto 
+        ? (userFoto.startsWith('http') ? userFoto : `http://localhost:5000/static/uploads/${userFoto}`) 
+        : IconePerfil;
+
     return (
         <header className={styles.header}>
             
@@ -47,7 +74,6 @@ export function Header() {
                 </Link>
             </div>
             
-            {/* O Botão hambúrguer vai para o final porque a rightArea some no mobile */}
             <button className={styles.hamburgerBtn} onClick={() => setMenuOpen(!menuOpen)}>
                 {menuOpen ? '✖' : '☰'}
             </button>
@@ -79,7 +105,7 @@ export function Header() {
                 {/* Perfil renderizado DENTRO do menu, visível apenas no mobile */}
                 <div className={styles.mobileProfile}>
                     <Link to={isAuth ? "/perfil" : "/login"} onClick={() => setMenuOpen(false)}>
-                        <img src={IconePerfil} alt="Perfil" className={styles.profileImg} />
+                        <img src={fotoSrc} alt="Perfil" className={styles.profileImg} />
                     </Link>
                 </div>
             </nav>
@@ -87,7 +113,7 @@ export function Header() {
             {/* Perfil renderizado na direita, visível apenas no desktop */}
             <div className={styles.rightArea}>
                 <Link to={isAuth ? "/perfil" : "/login"} className={styles.profileBtn}>
-                    <img src={IconePerfil} alt="Perfil" className={styles.profileImg} />
+                    <img src={fotoSrc} alt="Perfil" className={styles.profileImg} />
                 </Link>
             </div>
 
