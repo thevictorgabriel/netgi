@@ -30,6 +30,7 @@
   border-radius: 50%;
   object-fit: cover;
   box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: width 0.3s ease, height 0.3s ease; /* Transição suave ao redimensionar a tela */
 }
 
 /* Lado das Informações */
@@ -76,23 +77,27 @@
   margin: 0;
 }
 
-/* Botões */
+/* Botões de Ação */
 .actionButtons {
   display: flex;
   gap: 1rem;
 }
 
 .btnDefault, .btnDanger {
-  background-color: #e9e9e9;
   border: none;
   padding: 0.6rem 1.5rem;
   border-radius: 20px;
   font-weight: 600;
   cursor: pointer;
-  color: #555;
   transition: background 0.2s;
   text-decoration: none;
   font-size: 0.9rem;
+  text-align: center;
+}
+
+.btnDefault {
+  background-color: #e9e9e9;
+  color: #555;
 }
 
 .btnDefault:hover {
@@ -100,75 +105,49 @@
 }
 
 .btnDanger {
-  color: #ff4d4d;
+  background-color: #ff4d4d;
+  color: #fff;
 }
 
 .btnDanger:hover {
-  background-color: #ffcccc;
+  background-color: #ff3333;
 }
 
-/* Links do final */
-.linksSection {
-  display: flex;
-  gap: 2rem;
-  margin-top: 1rem;
-}
-
-.linkedin, .lattes {
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 1.1rem;
-}
-
-.linkedin { color: #0066cc; }
-.lattes { color: #333; }
-
-/* Garante que a foto do perfil não estoure */
-.fotoPerfil {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-/* Empilha o perfil no celular */
-@media (max-width: 768px) {
-  .perfilContainer { /* ou a classe que envolve a foto e os dados */
+/* =========================================
+   RESPONSIVIDADE (MEDIA QUERIES)
+   ========================================= */
+@media (max-width: 700px) {
+  /* Empilha a foto em cima e os dados embaixo */
+  .profileWrapper {
+    display: block;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: 1.5rem;
+    gap: 1.5rem;
   }
 
-  .botoesAcao {
-    display: flex;
+  /* Reduz o tamanho da foto no celular */
+  .profileImage {
+    width: 150px;
+    height: 150px;
+  }
+
+  /* Centraliza o nome e o curso */
+  .headerInfo {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  /* Empilha os botões para facilitar o clique no celular */
+  .actionButtons {
     flex-direction: column;
     width: 100%;
     gap: 0.8rem;
   }
-}
 
-/* Garante que a foto do perfil não estoure */
-.fotoPerfil {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-/* Empilha o perfil no celular */
-@media (max-width: 768px) {
-  .perfilContainer { /* ou a classe que envolve a foto e os dados */
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 1.5rem;
-  }
-
-  .botoesAcao {
-    display: flex;
-    flex-direction: column;
+  .btnDefault, .btnDanger {
     width: 100%;
-    gap: 0.8rem;
+    padding: 0.8rem;
   }
 }

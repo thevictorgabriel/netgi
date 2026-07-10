@@ -15,7 +15,7 @@ export function Perfil() {
       try {
         const response = await fetch('http://localhost:5000/api/profile', {
           method: 'GET',
-          credentials: 'include' // O navegador envia o cookie automaticamente
+          credentials: 'include' 
         });
 
         if (response.status === 401) {
@@ -50,13 +50,19 @@ export function Perfil() {
       <Header />
       <main className={styles.mainContent}>
         <div className={styles.profileWrapper}>
+          
           <div className={styles.photoSection}>
             <img
               src={usuario.foto ? (usuario.foto.startsWith('http') ? usuario.foto : `http://localhost:5000/static/uploads/${usuario.foto}`) : IconePerfil}
               alt="Meu Perfil"
-              className={styles.profileImage} /* Mantenha sua classe CSS */
+              className={styles.profileImage}
+              onError={(e) => {
+                e.target.onerror = null; 
+                e.target.src = IconePerfil;
+              }}
             />
           </div>
+          
           <div className={styles.infoSection}>
             <div className={styles.headerInfo}>
               <div className={styles.nameEmail}>
@@ -67,14 +73,18 @@ export function Perfil() {
                 <span>{usuario.curso || "Curso não informado"}</span>
               </div>
             </div>
+            
             <div className={styles.bioBox}>
               <p>{usuario.bio || "Nenhuma biografia informada ainda."}</p>
             </div>
+            
             <div className={styles.actionButtons}>
               <Link to="/perfil/editar" className={styles.btnDefault}>Editar</Link>
-              <button onClick={handleLogout} style={{ backgroundColor: '#ff4d4d', color: '#fff', border: 'none', padding: '10px 20px', borderRadius: '20px', cursor: 'pointer' }}>Sair da Conta</button>
+              {/* O estilo em linha foi movido para a classe .btnDanger no CSS */}
+              <button onClick={handleLogout} className={styles.btnDanger}>Sair da Conta</button>
             </div>
           </div>
+          
         </div>
       </main>
       <Footer />
