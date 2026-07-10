@@ -106,7 +106,7 @@
   margin-top: auto;
   width: 100%;
   padding: 0.6rem;
-  background-color: #ff4d4d;
+  background-color: #cc0000;
   color: white;
   border: none;
   border-radius: 6px;
@@ -116,5 +116,5 @@
 }
 
 .btnDeletar:hover {
-  background-color: #cc0000;
+  background-color: #ff4d4d;
 }

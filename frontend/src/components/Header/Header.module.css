@@ -52,7 +52,7 @@
 }
 
 .statusOpen {
-  background-color: #1e8e3e;
+  background-color: #368F8B;
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 20px;
@@ -61,7 +61,7 @@
 }
 
 .statusClosed {
-  background-color: #d93025;
+  background-color: #FF5A5F;
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 20px;

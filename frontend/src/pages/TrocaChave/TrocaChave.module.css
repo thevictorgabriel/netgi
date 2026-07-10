@@ -22,8 +22,8 @@
 
 .transferGroup { display: flex; gap: 0.5rem; flex-direction: column; }
 .selectUser { padding: 0.8rem; border: 1px solid #ccc; border-radius: 6px; font-size: 1rem; }
-.btnTransferir { background: #0056b3; }
+.btnTransferir { background: #5C95FF; }
 
-.btnDevolver { background: #d93025; }
+.btnDevolver { background: #FF5A5F; }
 
-.avisoOcupado { color: #d93025; background: #fce8e6; padding: 1rem; border-radius: 6px; font-weight: 500; }
+.avisoOcupado { color: #FF5A5F; background: #fce8e6; padding: 1rem; border-radius: 6px; font-weight: 500; }

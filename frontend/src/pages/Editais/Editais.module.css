@@ -127,7 +127,7 @@
    Botões e Ações
 ========================================= */
 .btnNovo { 
-    background: #0056b3; 
+    background: #5C95FF; 
     color: white; 
     border: none; 
     padding: 0.6rem 1.2rem; 
@@ -185,7 +185,7 @@
 }
 
 .btnDeletar { 
-    background: #d93025; 
+    background: #FF5A5F; 
 }
 
 /* RESPONSIVIDADE DO FORMULÁRIO E CARDS */
