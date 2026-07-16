@@ -1,101 +1,750 @@
+/* =========================================================
+   NETGI — LOGIN
+   Login.module.css
+========================================================= */
+
+/* =========================================================
+   PÁGINA
+========================================================= */
+
 .pageContainer {
   display: flex;
   flex-direction: column;
+
+  width: 100%;
   min-height: 100vh;
-  background-color: #fafafa;
+
+  overflow-x: hidden;
+
+  color: #707073;
+
+  background: linear-gradient(180deg, #f8f8f8 0%, #f5f5f5 52%, #f7f7f7 100%);
 }
+
+/* =========================================================
+   CONTEÚDO PRINCIPAL
+========================================================= */
 
 .mainContent {
+  position: relative;
+
+  display: grid;
   flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 4rem 1rem;
+
+  place-items: center;
+
+  width: 100%;
+
+  min-height: 900px;
+
+  padding: 70px 24px 160px;
+
+  overflow: hidden;
 }
+
+/* =========================================================
+   FORMULÁRIO
+========================================================= */
 
 .formWrapper {
-  background: white;
-  padding: 3rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  width: 100%;
-  max-width: 400px;
+  position: relative;
+
+  z-index: 4;
+
+  width: min(660px, 100%);
+
+  margin: 0 auto;
 }
 
-.formWrapper h2 {
-  text-align: center;
-  color: #333;
-  margin-bottom: 2rem;
-  font-size: 1.8rem;
+/* =========================================================
+   TÍTULO
+========================================================= */
+
+.titleRow {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 18px;
+
+  margin-bottom: 80px;
 }
+
+.titleRow h1 {
+  margin: 0;
+
+  color: #6c6c6f;
+
+  font-size: clamp(3.5rem, 6vw, 5.6rem);
+
+  line-height: 0.92;
+
+  font-weight: 700;
+
+  letter-spacing: -0.065em;
+}
+
+/* =========================================================
+   IMAGEM AO LADO DO TÍTULO
+========================================================= */
+
+.titleIcon {
+  display: block;
+
+  width: 90px;
+  height: 62px;
+
+  object-fit: contain;
+
+  filter: drop-shadow(0 10px 10px rgba(70, 70, 73, 0.12));
+
+  pointer-events: none;
+
+  user-select: none;
+}
+
+/* =========================================================
+   FORM
+========================================================= */
 
 .form {
   display: flex;
+
   flex-direction: column;
-  gap: 1.2rem;
+
+  width: 100%;
+
+  gap: 18px;
 }
+
+/* =========================================================
+   INPUT GROUP
+========================================================= */
 
 .inputGroup {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  position: relative;
+
+  display: block;
+
+  width: 100%;
 }
 
-.inputGroup label {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #555;
-}
+/* =========================================================
+   INPUT
+========================================================= */
 
 .inputGroup input {
-  padding: 0.8rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 1rem;
+  width: 100%;
+
+  height: 68px;
+
+  padding: 0 28px;
+
+  border: 1px solid rgba(255, 255, 255, 0.56);
+
+  border-radius: 999px;
+
   outline: none;
+
+  color: #68686b;
+
+  font-size: 1.1rem;
+
+  line-height: 1;
+
+  font-weight: 600;
+
+  letter-spacing: -0.025em;
+
+  background: linear-gradient(
+    180deg,
+    rgba(230, 230, 232, 0.95),
+    rgba(219, 219, 222, 0.9)
+  );
+
+  box-shadow:
+    0 10px 22px rgba(70, 70, 74, 0.045),
+    inset 0 1px 1px rgba(255, 255, 255, 0.9),
+    inset 0 -1px 2px rgba(80, 80, 85, 0.025);
+
+  backdrop-filter: blur(16px);
+
+  -webkit-backdrop-filter: blur(16px);
+
+  transition:
+    transform 240ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 240ms ease,
+    box-shadow 240ms ease,
+    background 240ms ease;
 }
+
+/* =========================================================
+   PLACEHOLDER
+========================================================= */
+
+.inputGroup input::placeholder {
+  color: #747477;
+
+  opacity: 0.85;
+}
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+.inputGroup input:hover {
+  background: linear-gradient(
+    180deg,
+    rgba(234, 234, 236, 0.98),
+    rgba(224, 224, 226, 0.92)
+  );
+}
+
+/* =========================================================
+   FOCO
+========================================================= */
 
 .inputGroup input:focus {
-  border-color: #ff6b00;
+  transform: translateY(-1px);
+
+  border-color: rgba(252, 103, 1, 0.22);
+
+  box-shadow:
+    0 0 0 5px rgba(252, 103, 1, 0.055),
+    0 13px 28px rgba(70, 70, 74, 0.065),
+    inset 0 1px 1px rgba(255, 255, 255, 0.95);
 }
+
+/* =========================================================
+   SENHA
+========================================================= */
+
+.passwordGroup input {
+  padding-right: 80px;
+}
+
+/* =========================================================
+   BOTÃO OLHO
+========================================================= */
+
+.eyeButton {
+  position: absolute;
+
+  z-index: 5;
+
+  top: 50%;
+  right: 15px;
+
+  display: grid;
+
+  place-items: center;
+
+  width: 42px;
+  height: 42px;
+
+  padding: 0;
+
+  transform: translateY(-50%);
+
+  border: 1px solid rgba(255, 255, 255, 0.38);
+
+  border-radius: 50%;
+
+  color: #858588;
+
+  font-size: 1.05rem;
+
+  cursor: pointer;
+
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.55),
+    rgba(220, 220, 223, 0.38)
+  );
+
+  box-shadow:
+    0 5px 12px rgba(65, 65, 68, 0.055),
+    inset 0 1px 1px rgba(255, 255, 255, 0.75);
+
+  backdrop-filter: blur(10px);
+
+  -webkit-backdrop-filter: blur(10px);
+
+  transition:
+    color 220ms ease,
+    background 220ms ease,
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.eyeButton:hover {
+  color: #fc6701;
+
+  background: rgba(255, 255, 255, 0.75);
+
+  transform: translateY(-50%) scale(1.06);
+}
+
+.eyeButton:active {
+  transform: translateY(-50%) scale(0.94);
+}
+
+/* =========================================================
+   ESQUECEU A SENHA
+========================================================= */
 
 .forgotPassword {
+  margin-top: 2px;
+
+  padding-right: 16px;
+
+  color: #78787b;
+
+  font-size: 0.72rem;
+
+  line-height: 1;
+
+  font-weight: 500;
+
+  letter-spacing: -0.01em;
+
   text-align: right;
-  font-size: 0.8rem;
 }
 
-.forgotPassword a {
-  color: #ff6b00;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.submitBtn {
-  background-color: #ff6b00;
-  color: white;
-  border: none;
-  padding: 1rem;
-  border-radius: 4px;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  margin-top: 1rem;
-  transition: background 0.3s;
-}
-
-.submitBtn:hover {
-  background-color: #e65c00;
-}
+/* =========================================================
+   CADASTRO
+========================================================= */
 
 .registerLink {
-  text-align: center;
-  margin-top: 1.5rem;
-  font-size: 0.9rem;
-  color: #666;
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 5px;
+
+  margin-top: 125px;
+
+  color: #78787b;
+
+  font-size: 1rem;
+
+  line-height: 1;
+
+  font-weight: 500;
+
+  letter-spacing: -0.025em;
 }
 
 .registerLink a {
-  color: #ff6b00;
+  position: relative;
+
+  color: #fc6701;
+
+  font-weight: 750;
+
   text-decoration: none;
-  font-weight: bold;
+}
+
+.registerLink a::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  bottom: -4px;
+
+  width: 0;
+  height: 1px;
+
+  background: #fc6701;
+
+  transition: width 250ms ease;
+}
+
+.registerLink a:hover::after {
+  width: 100%;
+}
+
+/* =========================================================
+   BOTÃO ENTRAR
+========================================================= */
+
+.submitBtn {
+  position: relative;
+
+  isolation: isolate;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+
+  height: 64px;
+
+  margin-top: 5px;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(255, 255, 255, 0.8);
+
+  border-radius: 999px;
+
+  color: #ffffff;
+
+  cursor: pointer;
+
+  background: linear-gradient(
+    102deg,
+    #fc6701 0%,
+    #fc6701 43%,
+    rgba(255, 141, 65, 0.93) 56%,
+    rgba(255, 190, 147, 0.72) 67%,
+    rgba(255, 255, 255, 0.82) 82%,
+    rgba(226, 226, 228, 0.86) 100%
+  );
+
+  box-shadow:
+    0 20px 30px rgba(74, 74, 78, 0.19),
+    0 1px 0 rgba(255, 255, 255, 0.98) inset,
+    0 -9px 18px rgba(123, 123, 128, 0.07) inset;
+
+  backdrop-filter: blur(16px) saturate(160%);
+
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+
+  transition:
+    transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 280ms ease,
+    filter 280ms ease;
+}
+
+/* =========================================================
+   REFLEXO BOTÃO
+========================================================= */
+
+.submitBtn::before {
+  content: "";
+
+  position: absolute;
+
+  z-index: -1;
+
+  top: 1px;
+  left: 3%;
+
+  width: 90%;
+  height: 49%;
+
+  border-radius: inherit;
+
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.4), transparent);
+
+  opacity: 0.78;
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   TEXTO BOTÃO
+========================================================= */
+
+.submitBtn span {
+  position: relative;
+
+  z-index: 2;
+
+  font-size: 1.02rem;
+
+  line-height: 1;
+
+  font-weight: 800;
+
+  letter-spacing: 0.015em;
+
+  text-shadow: 0 1px 2px rgba(100, 70, 50, 0.15);
+}
+
+/* =========================================================
+   HOVER BOTÃO
+========================================================= */
+
+.submitBtn:hover:not(:disabled) {
+  transform: translateY(-3px) scale(1.008);
+
+  filter: saturate(1.04);
+
+  box-shadow:
+    0 25px 36px rgba(74, 74, 78, 0.22),
+    0 1px 0 rgba(255, 255, 255, 1) inset;
+}
+
+.submitBtn:active:not(:disabled) {
+  transform: translateY(0) scale(0.99);
+}
+
+.submitBtn:disabled {
+  cursor: wait;
+
+  opacity: 0.7;
+}
+
+/* =========================================================
+   MENSAGEM DE ERRO
+========================================================= */
+
+.feedbackError {
+  padding: 13px 18px;
+
+  border: 1px solid rgba(255, 255, 255, 0.7);
+
+  border-radius: 18px;
+
+  color: #b84440;
+
+  font-size: 0.84rem;
+
+  line-height: 1.35;
+
+  font-weight: 600;
+
+  text-align: center;
+
+  background: rgba(255, 224, 220, 0.66);
+
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.7);
+}
+
+/* =========================================================
+   IMAGENS DECORATIVAS
+========================================================= */
+
+.decorIcon {
+  position: absolute;
+
+  z-index: 2;
+
+  display: block;
+
+  width: 125px;
+  height: 125px;
+
+  object-fit: contain;
+
+  pointer-events: none;
+
+  user-select: none;
+
+  filter: drop-shadow(0 18px 14px rgba(65, 65, 69, 0.16));
+}
+
+/* =========================================================
+   ESQUERDA
+========================================================= */
+
+.decorLeft {
+  top: 44%;
+
+  left: clamp(30px, 10vw, 170px);
+
+  transform: rotate(-7deg);
+}
+
+/* =========================================================
+   DIREITA
+========================================================= */
+
+.decorRight {
+  top: 27%;
+
+  right: clamp(35px, 12vw, 210px);
+
+  transform: rotate(6deg);
+}
+
+/* =========================================================
+   ACESSIBILIDADE
+========================================================= */
+
+.srOnly {
+  position: absolute;
+
+  width: 1px;
+  height: 1px;
+
+  padding: 0;
+
+  margin: -1px;
+
+  overflow: hidden;
+
+  clip: rect(0, 0, 0, 0);
+
+  white-space: nowrap;
+
+  border: 0;
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+  .mainContent {
+    min-height: 760px;
+
+    padding: 55px 24px 110px;
+  }
+
+  .formWrapper {
+    width: min(580px, 100%);
+  }
+
+  .titleRow {
+    margin-bottom: 60px;
+  }
+
+  .decorIcon {
+    width: 80px;
+    height: 80px;
+
+    opacity: 0.5;
+  }
+
+  .decorLeft {
+    left: -10px;
+  }
+
+  .decorRight {
+    right: -10px;
+  }
+
+  .registerLink {
+    margin-top: 90px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 560px) {
+  .mainContent {
+    min-height: 700px;
+
+    padding: 55px 18px 90px;
+  }
+
+  .titleRow {
+    gap: 10px;
+
+    margin-bottom: 48px;
+  }
+
+  .titleRow h1 {
+    font-size: clamp(3.2rem, 15vw, 4.2rem);
+  }
+
+  .titleIcon {
+    width: 70px;
+    height: 48px;
+  }
+
+  .inputGroup input {
+    height: 58px;
+
+    padding: 0 22px;
+
+    font-size: 1rem;
+  }
+
+  .passwordGroup input {
+    padding-right: 70px;
+  }
+
+  .eyeButton {
+    right: 11px;
+
+    width: 38px;
+    height: 38px;
+  }
+
+  .registerLink {
+    margin-top: 70px;
+
+    font-size: 0.9rem;
+  }
+
+  .submitBtn {
+    height: 58px;
+  }
+
+  .decorIcon {
+    width: 65px;
+    height: 65px;
+
+    opacity: 0.28;
+  }
+
+  .decorLeft {
+    top: 37%;
+
+    left: -18px;
+  }
+
+  .decorRight {
+    top: 20%;
+
+    right: -18px;
+  }
+}
+
+/* =========================================================
+   TELAS PEQUENAS
+========================================================= */
+
+@media (max-width: 380px) {
+  .titleRow h1 {
+    font-size: 3rem;
+  }
+
+  .titleIcon {
+    width: 58px;
+    height: 42px;
+  }
+
+  .registerLink {
+    flex-direction: column;
+
+    gap: 7px;
+  }
+}
+
+/* =========================================================
+   AUTOFILL
+========================================================= */
+
+.inputGroup input:-webkit-autofill,
+.inputGroup input:-webkit-autofill:hover,
+.inputGroup input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #68686b;
+
+  -webkit-box-shadow: 0 0 0 1000px #e4e4e6 inset;
+
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* =========================================================
+   REDUÇÃO DE MOVIMENTO
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .inputGroup input,
+  .eyeButton,
+  .submitBtn,
+  .registerLink a::after {
+    transition: none;
+  }
 }

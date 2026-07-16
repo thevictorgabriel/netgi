@@ -1,138 +1,1093 @@
+/* =========================================================
+   NETGI — HEADER
+   Header.module.css
+
+   Estrutura desktop adaptável:
+
+   [ STATUS ]  ← flexível →  [ NAVEGAÇÃO DINÂMICA ]  ← flexível →  [ PERFIL ]
+
+   A navegação cresce automaticamente conforme
+   novos itens são adicionados.
+
+   O header NÃO possui fundo próprio.
+   Cada elemento é uma cápsula independente.
+========================================================= */
+
+/* =========================================================
+   HEADER
+========================================================= */
+
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  background-color: #ffffff;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   position: relative;
+
   z-index: 1000;
+
+  display: grid;
+
+  /*
+     As laterais possuem o mesmo comportamento flexível.
+     O centro cresce conforme o próprio conteúdo.
+  */
+
+  grid-template-columns:
+    minmax(max-content, 1fr)
+    max-content
+    minmax(max-content, 1fr);
+
+  align-items: center;
+
+  column-gap: clamp(18px, 2.2vw, 42px);
+
+  /*
+     Antes: máximo 1120px.
+     Agora pode respirar até 1500px.
+  */
+
+  width: min(1500px, calc(100% - 48px));
+
+  min-height: 62px;
+
+  margin: 40px auto 0;
+
+  padding: 0;
+
+  background: transparent;
+
+  transition: width 350ms cubic-bezier(0.22, 1, 0.36, 1);
 }
+
+/* =========================================================
+   ÁREA ESQUERDA
+========================================================= */
 
 .leftArea {
-  flex: 1;
   display: flex;
-  justify-content: flex-start;
-}
 
-.logoImage {
-  height: 50px;
-  width: auto;
-}
-
-.centerArea {
-  display: flex;
   align-items: center;
-  gap: 1.5rem;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  justify-content: flex-start;
+
+  justify-self: start;
+
+  min-width: max-content;
 }
 
-.centerArea a {
+/* =========================================================
+   STATUS — CÁPSULA EXTERNA
+========================================================= */
+
+.labStatus {
+  position: relative;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  flex-shrink: 0;
+
+  width: max-content;
+
+  min-width: 270px;
+
+  height: 58px;
+
+  padding: 6px 20px 6px 7px;
+
+  gap: 18px;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(255, 255, 255, 0.38);
+
+  border-radius: 999px;
+
   text-decoration: none;
-  color: #333;
+
+  background: linear-gradient(
+    115deg,
+    rgba(220, 220, 221, 0.88) 0%,
+    rgba(232, 232, 233, 0.82) 55%,
+    rgba(224, 224, 225, 0.86) 100%
+  );
+
+  box-shadow:
+    0 13px 28px rgba(53, 53, 55, 0.09),
+    0 5px 12px rgba(53, 53, 55, 0.05),
+    inset 0 1px 1px rgba(255, 255, 255, 0.58);
+
+  backdrop-filter: blur(22px) saturate(135%);
+
+  -webkit-backdrop-filter: blur(22px) saturate(135%);
+
+  transition:
+    transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 300ms ease;
+}
+
+/* =========================================================
+   REFLEXO STATUS
+========================================================= */
+
+.labStatus::before {
+  content: "";
+
+  position: absolute;
+
+  top: 1px;
+  left: 8%;
+
+  width: 84%;
+  height: 45%;
+
+  border-radius: inherit;
+
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.23), transparent);
+
+  pointer-events: none;
+}
+
+a.labStatus:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 17px 35px rgba(53, 53, 55, 0.12),
+    0 7px 14px rgba(53, 53, 55, 0.06),
+    inset 0 1px 1px rgba(255, 255, 255, 0.68);
+}
+
+/* =========================================================
+   BOTÃO ABERTO / FECHADO
+========================================================= */
+
+.statusOpen,
+.statusClosed {
+  position: relative;
+
+  z-index: 2;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  width: 126px;
+  height: 44px;
+
+  padding: 0 18px;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(255, 255, 255, 0.55);
+
+  border-radius: 999px;
+
+  color: #ffffff;
+
+  font-size: 1.08rem;
+
+  line-height: 1;
+
+  font-weight: 750;
+
+  letter-spacing: -0.04em;
+
+  text-shadow: 0 1px 2px rgba(94, 45, 0, 0.12);
+
+  backdrop-filter: blur(15px) saturate(180%);
+
+  -webkit-backdrop-filter: blur(15px) saturate(180%);
+
+  box-shadow:
+    0 8px 15px rgba(66, 66, 68, 0.11),
+    inset 0 1px 2px rgba(255, 255, 255, 0.8),
+    inset 0 -2px 5px rgba(160, 70, 0, 0.06);
+}
+
+/* =========================================================
+   ABERTO
+========================================================= */
+
+.statusOpen {
+  background:
+    radial-gradient(
+      ellipse at 22% 18%,
+      rgba(255, 255, 255, 0.38) 0%,
+      rgba(255, 255, 255, 0) 42%
+    ),
+    linear-gradient(
+      105deg,
+      #ff6700 0%,
+      #ff7000 38%,
+      #ff842c 58%,
+      rgba(255, 164, 101, 0.68) 72%,
+      rgba(255, 255, 255, 0.9) 100%
+    );
+
+  box-shadow:
+    0 8px 16px rgba(255, 104, 0, 0.22),
+    0 4px 9px rgba(68, 68, 70, 0.09),
+    inset 0 1px 2px rgba(255, 255, 255, 0.86);
+}
+
+/* =========================================================
+   FECHADO
+========================================================= */
+
+.statusClosed {
+  background:
+    radial-gradient(ellipse at 22% 18%, #fc6701 0%, rgba(253, 101, 0, 0) 42%),
+    linear-gradient(
+      105deg,
+      #fc6701 0%,
+      #fc6701 38%,
+      #ffb17e 62%,
+      #f7bf9a 76%,
+      rgba(255, 255, 255, 0.986) 100%
+    );
+
+  box-shadow:
+    0 8px 16px rgba(116, 116, 116, 0.021),
+    0 4px 9px rgba(68, 68, 70, 0.212),
+    inset 0 1px 2px rgb(255, 115, 0);
+}
+
+/* =========================================================
+   REFLEXO ABERTO / FECHADO
+========================================================= */
+
+.statusOpen::before,
+.statusClosed::before {
+  content: "";
+
+  position: absolute;
+
+  top: 2px;
+  left: 8%;
+
+  width: 72%;
+  height: 47%;
+
+  border-radius: 999px;
+
+  background: linear-gradient(180deg, #fff7f18f, rgba(255, 255, 255, 0));
+
+  filter: blur(1px);
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   INFORMAÇÃO DA CHAVE
+========================================================= */
+
+.statusInfo {
+  position: relative;
+
+  z-index: 2;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  min-width: 86px;
+
+  max-width: 125px;
+
+  margin-top: -1px;
+
+  line-height: 1;
+}
+
+.statusInfo small {
+  display: block;
+
+  margin-bottom: 3px;
+
+  color: #454549;
+
+  font-size: 0.66rem;
+
+  line-height: 1;
+
   font-weight: 500;
-  transition: color 0.2s;
+
+  letter-spacing: -0.025em;
+}
+
+.statusInfo strong {
+  display: block;
+
+  overflow: hidden;
+
+  color: #111d2a;
+
+  font-size: 0.9rem;
+
+  line-height: 1.05;
+
+  font-weight: 750;
+
+  letter-spacing: -0.035em;
+
+  text-overflow: ellipsis;
+
   white-space: nowrap;
 }
 
-.centerArea a:hover {
-  color: #0056b3;
+/* =========================================================
+   NAVEGAÇÃO CENTRAL
+   TOTALMENTE FLEXÍVEL E ADAPTÁVEL
+========================================================= */
+
+.centerArea {
+  position: relative;
+
+  justify-self: center;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  /*
+     A cápsula usa exatamente a largura necessária
+     para os links existentes.
+  */
+
+  width: max-content;
+
+  max-width: calc(100vw - 420px);
+
+  min-height: 58px;
+
+  gap: 2px;
+
+  padding: 6px 9px;
+
+  /*
+     Não usamos overflow hidden.
+     Assim sombras e efeitos dos links ativos
+     não são cortados.
+  */
+
+  overflow: visible;
+
+  border: 1px solid rgba(255, 255, 255, 0.28);
+
+  border-radius: 999px;
+
+  background: linear-gradient(
+    110deg,
+    rgba(220, 220, 221, 0.84),
+    rgba(229, 229, 230, 0.88)
+  );
+
+  box-shadow:
+    0 14px 30px rgba(53, 53, 55, 0.09),
+    0 5px 12px rgba(53, 53, 55, 0.04),
+    inset 0 1px 1px rgba(255, 255, 255, 0.5);
+
+  backdrop-filter: blur(22px) saturate(135%);
+
+  -webkit-backdrop-filter: blur(22px) saturate(135%);
+
+  transition:
+    width 350ms cubic-bezier(0.22, 1, 0.36, 1),
+    padding 350ms ease;
 }
 
-.mobileProfile {
-  display: none; /* Escondido no PC */
+/* =========================================================
+   REFLEXO NAVEGAÇÃO
+========================================================= */
+
+.centerArea::before {
+  content: "";
+
+  position: absolute;
+
+  top: 1px;
+  left: 5%;
+
+  width: 90%;
+  height: 45%;
+
+  border-radius: inherit;
+
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.22), transparent);
+
+  pointer-events: none;
 }
 
-.rightArea {
-  flex: 1;
-  display: flex;
-  justify-content: flex-end;
+/* =========================================================
+   LINKS
+========================================================= */
+
+.navLink {
+  position: relative;
+
+  z-index: 2;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 auto;
+
+  min-height: 44px;
+
+  /*
+     Padding também se adapta à largura disponível.
+  */
+
+  padding: 0 clamp(14px, 1.25vw, 22px);
+
+  border: 1px solid transparent;
+
+  border-radius: 999px;
+
+  color: #6d6d6f;
+
+  font-size: clamp(0.84rem, 0.82vw, 0.94rem);
+
+  line-height: 1;
+
+  font-weight: 700;
+
+  letter-spacing: -0.035em;
+
+  text-decoration: none;
+
+  white-space: nowrap;
+
+  transition:
+    color 200ms ease,
+    transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
+    background 300ms ease,
+    box-shadow 300ms ease;
 }
 
-.statusOpen {
-  background-color: #368F8B;
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  font-weight: bold;
-  font-size: 0.9rem;
+.navLink:hover {
+  color: #575759;
+
+  transform: translateY(-1px);
 }
 
-.statusClosed {
-  background-color: #FF5A5F;
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  font-weight: bold;
-  font-size: 0.9rem;
+/* =========================================================
+   ITEM ATIVO
+========================================================= */
+
+.activeNav {
+  color: #68686a !important;
+
+  border-color: rgba(255, 255, 255, 0.74);
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.96) 0%,
+    rgba(252, 252, 252, 0.92) 48%,
+    rgba(235, 235, 237, 0.88) 100%
+  );
+
+  box-shadow:
+    0 7px 13px rgba(71, 71, 73, 0.11),
+    inset 0 1px 2px rgba(255, 255, 255, 1),
+    inset 0 -1px 2px rgba(105, 105, 110, 0.04);
 }
+
+/* =========================================================
+   REFLEXO DO ATIVO
+========================================================= */
+
+.activeNav::before {
+  content: "";
+
+  position: absolute;
+
+  top: 1px;
+  left: 10%;
+
+  width: 80%;
+  height: 45%;
+
+  border-radius: 999px;
+
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.7), transparent);
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   ADMIN
+========================================================= */
 
 .adminLink {
-  color: #ff6b00 !important;
-  font-weight: bold;
+  color: #f06a11;
 }
 
-.profileImg {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid #eee;
+/* =========================================================
+   DIREITA
+========================================================= */
+
+.rightArea {
+  display: flex;
+
+  align-items: center;
+  justify-content: flex-end;
+
+  justify-self: end;
+
+  min-width: max-content;
 }
+
+/* =========================================================
+   PERFIL
+========================================================= */
+
+.profileBtn {
+  position: relative;
+
+  display: grid;
+
+  place-items: center;
+
+  flex-shrink: 0;
+
+  width: 58px;
+  height: 58px;
+
+  padding: 6px;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(255, 255, 255, 0.38);
+
+  border-radius: 50%;
+
+  color: #ffffff;
+
+  text-decoration: none;
+
+  background: linear-gradient(
+    145deg,
+    rgba(217, 217, 218, 0.86),
+    rgba(235, 235, 236, 0.82)
+  );
+
+  box-shadow:
+    0 13px 27px rgba(53, 53, 55, 0.1),
+    inset 0 1px 1px rgba(255, 255, 255, 0.68);
+
+  backdrop-filter: blur(20px);
+
+  -webkit-backdrop-filter: blur(20px);
+
+  transition:
+    transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 320ms ease;
+}
+
+/* =========================================================
+   CÍRCULO LIQUID GLASS INTERNO
+========================================================= */
+
+.profileBtn::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 6px;
+
+  border: 1px solid rgba(255, 255, 255, 0.72);
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle at 36% 18%,
+      rgba(255, 255, 255, 0.42) 0%,
+      transparent 26%
+    ),
+    linear-gradient(
+      180deg,
+      #ff6700 0%,
+      #ff7312 36%,
+      #ff9c65 61%,
+      rgba(255, 255, 255, 0.94) 100%
+    );
+
+  box-shadow:
+    0 7px 14px rgba(255, 104, 0, 0.19),
+    inset 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+/* =========================================================
+   BRILHO PERFIL
+========================================================= */
+
+.profileBtn::after {
+  content: "";
+
+  position: absolute;
+
+  top: 9px;
+  left: 50%;
+
+  width: 21px;
+  height: 9px;
+
+  transform: translateX(-50%);
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.35);
+
+  filter: blur(3px);
+
+  pointer-events: none;
+}
+
+.profileBtn:hover {
+  transform: translateY(-3px) scale(1.035);
+
+  box-shadow:
+    0 17px 33px rgba(53, 53, 55, 0.13),
+    inset 0 1px 1px rgba(255, 255, 255, 0.75);
+}
+
+.profileBtn:active {
+  transform: translateY(0) scale(0.96);
+}
+
+/* =========================================================
+   ÍCONE DE USUÁRIO
+========================================================= */
+
+.userIcon {
+  position: relative;
+
+  z-index: 3;
+
+  width: 25px;
+  height: 25px;
+
+  color: #ffffff;
+
+  filter: drop-shadow(0 1px 2px rgba(80, 50, 25, 0.09));
+}
+
+/* =========================================================
+   MOBILE PROFILE
+========================================================= */
+
+.mobileProfile {
+  display: none;
+}
+
+.mobileProfileLink {
+  text-decoration: none;
+}
+
+/* =========================================================
+   HAMBURGER
+========================================================= */
 
 .hamburgerBtn {
   display: none;
-  background: none;
-  border: none;
-  font-size: 2rem;
-  cursor: pointer;
-  color: #333;
 }
 
-/* RESPONSIVIDADE MOBILE */
-@media (max-width: 1100px) {
-  .hamburgerBtn {
-    display: block;
+/* =========================================================
+   DESKTOP MÉDIO
+   Compacta levemente os itens sem quebrar o menu
+========================================================= */
+
+@media (max-width: 1280px) {
+  .header {
+    width: calc(100% - 36px);
+
+    column-gap: 18px;
   }
 
-  /* Oculta a área direita no celular, fazendo o hambúrguer ir para o fim */
-  .rightArea {
-    display: none; 
+  .labStatus {
+    min-width: 245px;
+
+    gap: 13px;
+
+    padding-right: 15px;
+  }
+
+  .statusOpen,
+  .statusClosed {
+    width: 108px;
+
+    padding: 0 14px;
+
+    font-size: 0.96rem;
+  }
+
+  .navLink {
+    padding: 0 14px;
+
+    font-size: 0.85rem;
   }
 
   .centerArea {
+    padding: 6px 7px;
+  }
+}
+
+/* =========================================================
+   RESPONSIVIDADE — TABLET / MENU MOBILE
+
+   Só vira menu quando realmente o espaço
+   horizontal começa a ficar insuficiente.
+========================================================= */
+
+@media (max-width: 1080px) {
+  .header {
+    grid-template-columns:
+      1fr
+      auto;
+
+    width: calc(100% - 36px);
+
+    margin-top: 24px;
+  }
+
+  .leftArea {
+    justify-content: flex-start;
+  }
+
+  .rightArea {
+    display: none;
+  }
+
+  /* =======================================================
+     STATUS
+  ======================================================= */
+
+  .labStatus {
+    min-width: 235px;
+
+    height: 54px;
+
+    gap: 13px;
+  }
+
+  .statusOpen,
+  .statusClosed {
+    width: 105px;
+
+    height: 40px;
+
+    font-size: 0.95rem;
+  }
+
+  /* =======================================================
+     MENU
+  ======================================================= */
+
+  .hamburgerBtn {
+    position: relative;
+
+    z-index: 10;
+
+    display: grid;
+
+    place-items: center;
+
+    width: 54px;
+    height: 54px;
+
+    padding: 0;
+
+    overflow: hidden;
+
+    border: 1px solid rgba(255, 255, 255, 0.42);
+
+    border-radius: 50%;
+
+    color: #ffffff;
+
+    cursor: pointer;
+
+    background: linear-gradient(
+      145deg,
+      rgba(218, 218, 220, 0.9),
+      rgba(235, 235, 237, 0.84)
+    );
+
+    box-shadow: 0 12px 26px rgba(53, 53, 55, 0.11);
+
+    backdrop-filter: blur(20px);
+
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  .hamburgerBtn::before {
+    content: "";
+
     position: absolute;
-    top: 100%;
+
+    inset: 5px;
+
+    border-radius: 50%;
+
+    background: linear-gradient(
+      180deg,
+      #fc6701 0%,
+      #ff822e 52%,
+      rgba(255, 255, 255, 0.92) 100%
+    );
+
+    box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.75);
+  }
+
+  .menuIcon {
+    position: relative;
+
+    z-index: 2;
+
+    width: 21px;
+    height: 21px;
+  }
+
+  /* =======================================================
+     DROPDOWN
+  ======================================================= */
+
+  .centerArea {
+    position: absolute;
+
+    top: calc(100% + 14px);
+
     left: 0;
-    transform: none;
-    width: 100%;
+    right: 0;
+
+    justify-self: auto;
+
+    width: min(460px, 100%);
+
+    max-width: 100%;
+
+    margin: 0 auto;
+
+    padding: 10px;
+
     flex-direction: column;
-    background-color: #ffffff;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    padding: 2rem 1rem;
-    gap: 1.5rem;
-    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-    transition: clip-path 0.3s ease-in-out;
+
+    align-items: stretch;
+
+    gap: 4px;
+
+    border-radius: 28px;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transform: translateY(-10px) scale(0.98);
+
+    transform-origin: top center;
+
+    transition:
+      opacity 250ms ease,
+      visibility 250ms ease,
+      transform 350ms cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .centerArea.open {
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+
+    transform: translateY(0) scale(1);
   }
 
-  .centerArea a, .centerArea div {
+  .navLink {
     width: 100%;
-    text-align: center;
-    padding: 0.8rem 0;
-    border-bottom: 1px solid #f0f0f0;
+
+    min-height: 48px;
+
+    padding: 0 20px;
+
+    font-size: 0.92rem;
   }
 
-  /* Mostra a foto de perfil dentro do menu dropdown */
+  /* =======================================================
+     PERFIL MOBILE
+  ======================================================= */
+
   .mobileProfile {
+    display: block;
+
+    margin-top: 5px;
+
+    padding-top: 9px;
+
+    border-top: 1px solid rgba(120, 120, 123, 0.1);
+  }
+
+  .mobileProfileLink {
     display: flex;
+
+    align-items: center;
     justify-content: center;
-    border-bottom: none; /* Remove a linha do último item */
-    padding-top: 1rem;
+
+    gap: 10px;
+
+    min-height: 50px;
+
+    border-radius: 999px;
+
+    color: #666669;
+
+    font-size: 0.92rem;
+
+    font-weight: 700;
+  }
+
+  .mobileIcon {
+    position: relative;
+
+    display: grid;
+
+    place-items: center;
+
+    width: 36px;
+    height: 36px;
+
+    border-radius: 50%;
+
+    color: #ffffff;
+
+    background: linear-gradient(180deg, #fc6701, #fc6701 60%, #ffffff);
+
+    box-shadow: 0 6px 12px rgba(255, 104, 0, 0.18);
+  }
+
+  .mobileIcon .userIcon {
+    width: 19px;
+
+    height: 19px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+  .header {
+    width: calc(100% - 24px);
+
+    min-height: 50px;
+
+    margin-top: 14px;
+  }
+
+  .labStatus {
+    min-width: 200px;
+
+    height: 48px;
+
+    padding: 5px 12px 5px 5px;
+
+    gap: 10px;
+  }
+
+  .statusOpen,
+  .statusClosed {
+    width: 88px;
+
+    height: 38px;
+
+    padding: 0 10px;
+
+    font-size: 0.84rem;
+  }
+
+  .statusInfo {
+    min-width: 70px;
+
+    max-width: 80px;
+  }
+
+  .statusInfo small {
+    font-size: 0.55rem;
+  }
+
+  .statusInfo strong {
+    font-size: 0.76rem;
+  }
+
+  .hamburgerBtn {
+    width: 48px;
+
+    height: 48px;
+  }
+
+  .hamburgerBtn::before {
+    inset: 5px;
+  }
+
+  .centerArea {
+    top: calc(100% + 10px);
+
+    width: 100%;
+
+    border-radius: 24px;
+  }
+}
+
+/* =========================================================
+   MOBILE MUITO PEQUENO
+========================================================= */
+
+@media (max-width: 370px) {
+  .header {
+    width: calc(100% - 18px);
+  }
+
+  .labStatus {
+    min-width: 184px;
+  }
+
+  .statusOpen,
+  .statusClosed {
+    width: 78px;
+
+    font-size: 0.78rem;
+  }
+
+  .statusInfo {
+    max-width: 70px;
+  }
+
+  .hamburgerBtn {
+    width: 45px;
+
+    height: 45px;
+  }
+}
+
+/* =========================================================
+   ACESSIBILIDADE
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .header,
+  .labStatus,
+  .profileBtn,
+  .navLink,
+  .centerArea {
+    transition: none;
   }
 }

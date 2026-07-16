@@ -1,66 +1,108 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Header } from '../../components/Header/Header';
-import { Footer } from '../../components/Footer/Footer';
-import styles from './Cadastro.module.css';
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+
+import { Header } from "../../components/Header/Header";
+import { Footer } from "../../components/Footer/Footer";
+
+import decorLeft from "../../assets/logo.png";
+import decorRight from "../../assets/Icetec.png";
+import decorTitle from "../../assets/Letreiro.png";
+
+import styles from "./Cadastro.module.css";
 
 export function Cadastro() {
-  const [nome, setNome] = useState('');
-  const [telefone, setTelefone] = useState('');
-  const [email, setEmail] = useState('');
-  const [senha, setSenha] = useState('');
-  const [confirmarSenha, setConfirmarSenha] = useState('');
-  
-  const [mensagem, setMensagem] = useState({ tipo: '', texto: '' });
   const navigate = useNavigate();
+
+  const [nome, setNome] = useState("");
+  const [telefone, setTelefone] = useState("");
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+  const [confirmarSenha, setConfirmarSenha] = useState("");
+
+  const [mostrarSenha, setMostrarSenha] = useState(false);
+  const [mostrarConfirmarSenha, setMostrarConfirmarSenha] = useState(false);
+
+  const [mensagem, setMensagem] = useState({
+    tipo: "",
+    texto: "",
+  });
+
+  const [enviando, setEnviando] = useState(false);
+
+  /* =======================================================
+     CADASTRO
+  ======================================================= */
 
   const handleCadastro = async (event) => {
     event.preventDefault();
-    setMensagem({ tipo: '', texto: '' }); 
+
+    setMensagem({
+      tipo: "",
+      texto: "",
+    });
 
     if (senha !== confirmarSenha) {
-      setMensagem({ tipo: 'erro', texto: 'As senhas não coincidem.' });
+      setMensagem({
+        tipo: "erro",
+        texto: "As senhas não coincidem.",
+      });
+
       return;
     }
 
+    setEnviando(true);
+
     try {
-      // Nova requisição usando fetch nativo apontando para /api/register
-      const response = await fetch('http://localhost:5000/api/register', {
-        method: 'POST',
+      const response = await fetch("http://localhost:5000/api/register", {
+        method: "POST",
+
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
+
         body: JSON.stringify({
           nome,
           telefone,
           email,
-          senha
-        })
+          senha,
+        }),
       });
 
       const data = await response.json();
 
       if (response.ok) {
-        setMensagem({ tipo: 'sucesso', texto: data.mensagem });
-        
-        setNome('');
-        setTelefone('');
-        setEmail('');
-        setSenha('');
-        setConfirmarSenha('');
+        setMensagem({
+          tipo: "sucesso",
+          texto: data.mensagem || "Cadastro realizado com sucesso.",
+        });
+
+        setNome("");
+        setTelefone("");
+        setEmail("");
+        setSenha("");
+        setConfirmarSenha("");
 
         setTimeout(() => {
-          navigate('/login');
+          navigate("/login");
         }, 3500);
 
-      } else {
-        // Se o Flask retornar um erro (ex: email já cadastrado)
-        setMensagem({ tipo: 'erro', texto: data.erro || 'Erro ao realizar cadastro.' });
+        return;
       }
 
+      setMensagem({
+        tipo: "erro",
+        texto: data.erro || "Erro ao realizar cadastro.",
+      });
     } catch (error) {
       console.error("Erro no cadastro:", error);
-      setMensagem({ tipo: 'erro', texto: 'Erro de conexão com o servidor.' });
+
+      setMensagem({
+        tipo: "erro",
+        texto: "Erro de conexão com o servidor.",
+      });
+    } finally {
+      setEnviando(false);
     }
   };
 
@@ -69,93 +111,230 @@ export function Cadastro() {
       <Header />
 
       <main className={styles.mainContent}>
-        <div className={styles.formWrapper}>
-          <h2>Cadastro</h2>
-          
+        {/* =================================================
+            IMAGENS DECORATIVAS
+            Temporárias — podem ser removidas depois
+        ================================================== */}
+
+        <img
+          src={decorLeft}
+          alt=""
+          aria-hidden="true"
+          className={`
+            ${styles.decorIcon}
+            ${styles.decorTopLeft}
+          `}
+        />
+
+        <img
+          src={decorRight}
+          alt=""
+          aria-hidden="true"
+          className={`
+            ${styles.decorIcon}
+            ${styles.decorRight}
+          `}
+        />
+
+        <img
+          src={decorTitle}
+          alt=""
+          aria-hidden="true"
+          className={`
+            ${styles.decorIcon}
+            ${styles.decorLeft}
+          `}
+        />
+
+        {/* =================================================
+            CADASTRO
+        ================================================== */}
+
+        <section className={styles.formWrapper}>
+          {/* ===============================================
+              TÍTULO
+          ================================================ */}
+
+          <div className={styles.titleRow}>
+            <img
+              src={decorTitle}
+              alt=""
+              aria-hidden="true"
+              className={styles.titleIcon}
+            />
+
+            <h1>Cadastro</h1>
+          </div>
+
+          {/* ===============================================
+              FORMULÁRIO
+          ================================================ */}
+
           <form className={styles.form} onSubmit={handleCadastro}>
-            
+            {/* =============================================
+                MENSAGEM
+            ============================================== */}
+
             {mensagem.texto && (
-              <div style={{ 
-                color: mensagem.tipo === 'erro' ? '#d93025' : '#1e8e3e',
-                backgroundColor: mensagem.tipo === 'erro' ? '#fce8e6' : '#e6f4ea',
-                padding: '0.8rem', 
-                borderRadius: '4px',
-                textAlign: 'center', 
-                marginBottom: '1rem',
-                fontSize: '0.9rem',
-                fontWeight: '500'
-              }}>
+              <div
+                className={
+                  mensagem.tipo === "erro"
+                    ? styles.feedbackError
+                    : styles.feedbackSuccess
+                }
+                role="alert"
+              >
                 {mensagem.texto}
               </div>
             )}
 
-            <div className={styles.inputGroup}>
-              <label htmlFor="nome">Nome</label>
-              <input 
-                type="text" 
-                id="nome" 
-                placeholder="Seu nome completo" 
+            {/* =============================================
+                NOME
+            ============================================== */}
+
+            <label className={styles.inputGroup} htmlFor="nome">
+              <span className={styles.srOnly}>Nome</span>
+
+              <input
+                id="nome"
+                type="text"
+                placeholder="Nome"
                 value={nome}
-                onChange={(e) => setNome(e.target.value)}
-                required 
+                onChange={(event) => setNome(event.target.value)}
+                autoComplete="name"
+                required
               />
-            </div>
+            </label>
 
-            <div className={styles.inputGroup}>
-              <label htmlFor="telefone">Telefone</label>
-              <input 
-                type="tel" 
-                id="telefone" 
-                placeholder="(00) 00000-0000" 
+            {/* =============================================
+                TELEFONE
+            ============================================== */}
+
+            <label className={styles.inputGroup} htmlFor="telefone">
+              <span className={styles.srOnly}>Telefone</span>
+
+              <input
+                id="telefone"
+                type="tel"
+                placeholder="Telefone"
                 value={telefone}
-                onChange={(e) => setTelefone(e.target.value)}
-                required 
+                onChange={(event) => setTelefone(event.target.value)}
+                autoComplete="tel"
+                required
               />
-            </div>
+            </label>
 
-            <div className={styles.inputGroup}>
-              <label htmlFor="email">E-mail</label>
-              <input 
-                type="email" 
-                id="email" 
-                placeholder="Seu melhor e-mail" 
+            {/* =============================================
+                EMAIL
+            ============================================== */}
+
+            <label className={styles.inputGroup} htmlFor="email">
+              <span className={styles.srOnly}>E-mail</span>
+
+              <input
+                id="email"
+                type="email"
+                placeholder="E-mail"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required 
+                onChange={(event) => setEmail(event.target.value)}
+                autoComplete="email"
+                required
               />
-            </div>
+            </label>
 
-            <div className={styles.inputGroup}>
-              <label htmlFor="senha">Senha</label>
-              <input 
-                type="password" 
-                id="senha" 
-                placeholder="Crie uma senha" 
+            {/* =============================================
+                SENHA
+            ============================================== */}
+
+            <label
+              className={`
+                ${styles.inputGroup}
+                ${styles.passwordGroup}
+              `}
+              htmlFor="senha"
+            >
+              <span className={styles.srOnly}>Senha</span>
+
+              <input
+                id="senha"
+                type={mostrarSenha ? "text" : "password"}
+                placeholder="Senha"
                 value={senha}
-                onChange={(e) => setSenha(e.target.value)}
-                required 
+                onChange={(event) => setSenha(event.target.value)}
+                autoComplete="new-password"
+                required
               />
-            </div>
 
-            <div className={styles.inputGroup}>
-              <label htmlFor="confirmarSenha">Confirmar senha</label>
-              <input 
-                type="password" 
-                id="confirmarSenha" 
-                placeholder="Repita a senha" 
+              <button
+                type="button"
+                className={styles.eyeButton}
+                onClick={() => setMostrarSenha((atual) => !atual)}
+                aria-label={mostrarSenha ? "Ocultar senha" : "Mostrar senha"}
+              >
+                {mostrarSenha ? <FaEyeSlash /> : <FaEye />}
+              </button>
+            </label>
+
+            {/* =============================================
+                CONFIRMAR SENHA
+            ============================================== */}
+
+            <label
+              className={`
+                ${styles.inputGroup}
+                ${styles.passwordGroup}
+              `}
+              htmlFor="confirmarSenha"
+            >
+              <span className={styles.srOnly}>Confirmar senha</span>
+
+              <input
+                id="confirmarSenha"
+                type={mostrarConfirmarSenha ? "text" : "password"}
+                placeholder="Confirmar senha"
                 value={confirmarSenha}
-                onChange={(e) => setConfirmarSenha(e.target.value)}
-                required 
+                onChange={(event) => setConfirmarSenha(event.target.value)}
+                autoComplete="new-password"
+                required
               />
+
+              <button
+                type="button"
+                className={styles.eyeButton}
+                onClick={() => setMostrarConfirmarSenha((atual) => !atual)}
+                aria-label={
+                  mostrarConfirmarSenha
+                    ? "Ocultar confirmação da senha"
+                    : "Mostrar confirmação da senha"
+                }
+              >
+                {mostrarConfirmarSenha ? <FaEyeSlash /> : <FaEye />}
+              </button>
+            </label>
+
+            {/* =============================================
+                LINK LOGIN
+            ============================================== */}
+
+            <div className={styles.loginLink}>
+              <span>Já tenho uma conta?</span>
+
+              <Link to="/login">Entrar agora</Link>
             </div>
 
-            <button type="submit" className={styles.submitBtn}>CRIAR CONTA</button>
-          </form>
+            {/* =============================================
+                BOTÃO
+            ============================================== */}
 
-          <div className={styles.loginLink}>
-            <span>Já tenho uma conta? <Link to="/login">Entrar agora</Link></span>
-          </div>
-        </div>
+            <button
+              type="submit"
+              className={styles.submitBtn}
+              disabled={enviando}
+            >
+              <span>{enviando ? "CADASTRANDO..." : "CRIAR CONTA"}</span>
+            </button>
+          </form>
+        </section>
       </main>
 
       <Footer />

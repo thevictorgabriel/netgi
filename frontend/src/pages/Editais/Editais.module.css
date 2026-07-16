@@ -1,210 +1,979 @@
-/* =========================================
-   Layout Principal
-========================================= */
-.pageContainer { 
-    display: flex; 
-    flex-direction: column; 
-    min-height: 100vh; 
+/* =========================================================
+   NETGI — EDITAIS E EVENTOS
+   Editais.module.css
+
+   Direção visual:
+   - Mesma linguagem visual da Home
+   - Fundo cinza muito claro
+   - Tipografia ampla e suave
+   - Cards discretos
+   - Identidade #fc6701
+========================================================= */
+
+/* =========================================================
+   PÁGINA
+========================================================= */
+
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  min-height: 100vh;
+
+  overflow-x: hidden;
+
+  color: #707073;
+
+  background: linear-gradient(180deg, #f8f8f8 0%, #f5f5f5 48%, #f7f7f7 100%);
 }
 
-.mainContent { 
-    flex: 1; 
-    padding: 3rem 1rem; 
-    max-width: 1200px; 
-    margin: 0 auto; 
-    width: 100%; 
+/* =========================================================
+   CONTEÚDO PRINCIPAL
+========================================================= */
+
+.mainContent {
+  position: relative;
+
+  flex: 1;
+
+  width: min(1120px, calc(100% - 64px));
+
+  margin: 0 auto;
+
+  padding: 115px 0 150px;
 }
 
-/* =========================================
-   Cabeçalho (Header)
-========================================= */
-.headerSecao { 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-    margin-bottom: 2rem; 
-    border-bottom: 2px solid #eee; 
-    padding-bottom: 1rem; 
+/* =========================================================
+   CABEÇALHO DA PÁGINA
+========================================================= */
+
+.headerSecao {
+  position: relative;
+
+  display: flex;
+
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 40px;
+
+  width: 100%;
+
+  margin-bottom: 65px;
+
+  padding: 0;
+
+  border: none;
 }
 
-/* =========================================
-   Formulários
-========================================= */
-.formCard { 
-    background: white; 
-    padding: 2rem; 
-    border-radius: 8px; 
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
-    margin-bottom: 2rem; 
-    display: flex; 
-    flex-direction: column; 
-    gap: 1rem; 
+/* =========================================================
+   TÍTULO PRINCIPAL
+========================================================= */
+
+.headerSecao h2 {
+  max-width: 760px;
+
+  margin: 0;
+
+  color: #707073;
+
+  font-size: clamp(3.1rem, 5vw, 5.2rem);
+
+  line-height: 0.96;
+
+  font-weight: 700;
+
+  letter-spacing: -0.06em;
+
+  text-wrap: balance;
 }
 
-.inputGroupRow { 
-    display: flex; 
-    gap: 1rem; 
+/* =========================================================
+   BOTÃO ADICIONAR NOVO
+   Colorido do sistema NETGI
+========================================================= */
+
+.btnNovo {
+  position: relative;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  min-height: 48px;
+
+  padding: 0 26px;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(255, 255, 255, 0.58);
+
+  border-radius: 999px;
+
+  color: #ffffff;
+
+  font-size: 0.88rem;
+
+  line-height: 1;
+
+  font-weight: 700;
+
+  letter-spacing: -0.025em;
+
+  cursor: pointer;
+
+  background:
+    radial-gradient(
+      ellipse at 22% 18%,
+      rgba(255, 255, 255, 0.38),
+      transparent 42%
+    ),
+    linear-gradient(
+      105deg,
+      #fc6701 0%,
+      #fc6701 38%,
+      #ff9a58 64%,
+      #f7bf9a 78%,
+      rgba(255, 255, 255, 0.95) 100%
+    );
+
+  box-shadow:
+    0 9px 18px rgba(252, 103, 1, 0.16),
+    0 4px 9px rgba(68, 68, 70, 0.07),
+    inset 0 1px 2px rgba(255, 255, 255, 0.82);
+
+  transition:
+    transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 300ms ease;
 }
 
-.inputGroupRow input, 
-.inputGroupRow select { 
-    flex: 1; 
-    padding: 0.8rem; 
-    border: 1px solid #ccc; 
-    border-radius: 6px; 
+.btnNovo::before {
+  content: "";
+
+  position: absolute;
+
+  top: 2px;
+  left: 10%;
+
+  width: 70%;
+  height: 45%;
+
+  border-radius: inherit;
+
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.46), transparent);
+
+  pointer-events: none;
 }
 
-.formCard textarea { 
-    padding: 0.8rem; 
-    border: 1px solid #ccc; 
-    border-radius: 6px; 
-    resize: vertical; 
+.btnNovo:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 14px 25px rgba(252, 103, 1, 0.21),
+    0 5px 11px rgba(68, 68, 70, 0.08);
 }
 
-/* =========================================
-   Grid e Cartões de Evento
-========================================= */
-.gridEventos { 
-    display: grid; 
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
-    gap: 2rem; 
+.btnNovo:active {
+  transform: scale(0.97);
 }
 
-.cardEvento { 
-    background: white; 
-    border-radius: 12px; 
-    overflow: hidden; 
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08); 
-    display: flex; 
-    flex-direction: column; 
+/* =========================================================
+   FORMULÁRIO
+========================================================= */
+
+.formCard {
+  position: relative;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 18px;
+
+  width: 100%;
+
+  margin: 0 0 70px;
+
+  padding: 42px;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(255, 255, 255, 0.48);
+
+  border-radius: 34px;
+
+  background: linear-gradient(
+    145deg,
+    rgba(222, 222, 224, 0.82),
+    rgba(239, 239, 240, 0.72)
+  );
+
+  box-shadow:
+    0 18px 42px rgba(55, 55, 58, 0.07),
+    inset 0 1px 1px rgba(255, 255, 255, 0.68);
+
+  backdrop-filter: blur(22px) saturate(125%);
+
+  -webkit-backdrop-filter: blur(22px) saturate(125%);
 }
 
-.imgEvento { 
-    width: 100%; 
-    height: 200px; 
-    object-fit: cover; 
+/* Reflexo suave */
+
+.formCard::before {
+  content: "";
+
+  position: absolute;
+
+  top: 1px;
+  left: 5%;
+
+  width: 90%;
+  height: 42%;
+
+  border-radius: inherit;
+
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.18), transparent);
+
+  pointer-events: none;
 }
 
-.cardBody { 
-    padding: 1.5rem; 
-    display: flex; 
-    flex-direction: column; 
-    flex: 1; 
+/* =========================================================
+   TÍTULO DO FORMULÁRIO
+========================================================= */
+
+.formCard h3 {
+  position: relative;
+
+  z-index: 2;
+
+  margin: 0 0 10px;
+
+  color: #707073;
+
+  font-size: 2rem;
+
+  line-height: 1;
+
+  font-weight: 700;
+
+  letter-spacing: -0.045em;
 }
 
-.badge { 
-    background: #e8f0fe; 
-    color: #1a73e8; 
-    padding: 0.3rem 0.6rem; 
-    border-radius: 4px; 
-    font-size: 0.8rem; 
-    font-weight: bold; 
-    align-self: flex-start; 
-    margin-bottom: 1rem; 
+/* =========================================================
+   LINHAS DE CAMPOS
+========================================================= */
+
+.inputGroupRow {
+  position: relative;
+
+  z-index: 2;
+
+  display: flex;
+
+  align-items: stretch;
+
+  gap: 12px;
+
+  width: 100%;
 }
 
-.cardBody h3 { 
-    margin: 0 0 0.5rem 0; 
-    font-size: 1.3rem; 
+/* =========================================================
+   CAMPOS
+========================================================= */
+
+.inputGroupRow input,
+.inputGroupRow select,
+.formCard textarea {
+  width: 100%;
+  min-width: 0;
+
+  padding: 14px 17px;
+
+  border: 1px solid rgba(255, 255, 255, 0.58);
+
+  border-radius: 17px;
+
+  outline: none;
+
+  color: #606063;
+
+  font-size: 0.9rem;
+
+  line-height: 1.3;
+
+  font-weight: 500;
+
+  background: rgba(255, 255, 255, 0.58);
+
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.85),
+    0 5px 13px rgba(60, 60, 63, 0.035);
+
+  backdrop-filter: blur(12px);
+
+  -webkit-backdrop-filter: blur(12px);
+
+  transition:
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    background 220ms ease;
 }
 
-.dataTag { 
-    font-size: 0.9rem; 
-    color: #555; 
-    margin-bottom: 1rem; 
-    font-weight: 500; 
+.inputGroupRow input {
+  flex: 1;
 }
 
-.descricao { 
-    color: #666; 
-    font-size: 0.95rem; 
-    line-height: 1.5; 
-    flex: 1; 
-    margin-bottom: 1.5rem; 
+.inputGroupRow select {
+  flex: 0.5;
+
+  cursor: pointer;
 }
 
-/* =========================================
-   Botões e Ações
-========================================= */
-.btnNovo { 
-    background: #5C95FF; 
-    color: white; 
-    border: none; 
-    padding: 0.6rem 1.2rem; 
-    border-radius: 6px; 
-    cursor: pointer; 
-    font-weight: bold; 
+.formCard textarea {
+  position: relative;
+
+  z-index: 2;
+
+  min-height: 110px;
+
+  resize: vertical;
 }
 
-.btnSalvar { 
-    background: #1e8e3e; 
-    color: white; 
-    border: none; 
-    padding: 1rem; 
-    border-radius: 6px; 
-    font-weight: bold; 
-    cursor: pointer; 
+.inputGroupRow input::placeholder,
+.formCard textarea::placeholder {
+  color: rgba(95, 95, 98, 0.55);
 }
 
-.acoesBase { 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-    border-top: 1px solid #eee; 
-    padding-top: 1rem; 
+/* Foco */
+
+.inputGroupRow input:focus,
+.inputGroupRow select:focus,
+.formCard textarea:focus {
+  border-color: rgba(252, 103, 1, 0.35);
+
+  background: rgba(255, 255, 255, 0.75);
+
+  box-shadow:
+    0 0 0 4px rgba(252, 103, 1, 0.06),
+    inset 0 1px 1px rgba(255, 255, 255, 1);
 }
 
-.btnLink { 
-    background: #ff6b00; 
-    color: white; 
-    padding: 0.6rem 1rem; 
-    border-radius: 6px; 
-    text-decoration: none; 
-    font-size: 0.9rem; 
-    font-weight: bold; 
+/* =========================================================
+   INPUT DE ARQUIVO
+========================================================= */
+
+.inputGroupRow input[type="file"] {
+  padding: 9px 12px;
 }
 
-.acoesAdmin { 
-    display: flex; 
-    gap: 0.5rem; 
+.inputGroupRow input[type="file"]::file-selector-button {
+  margin-right: 12px;
+
+  padding: 9px 15px;
+
+  border: none;
+
+  border-radius: 999px;
+
+  color: #6b6b6e;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  background: rgba(225, 225, 227, 0.9);
+
+  transition: background 200ms ease;
 }
 
-.btnEditar, 
-.btnDeletar { 
-    border: none; 
-    padding: 0.5rem 0.8rem; 
-    border-radius: 4px; 
-    cursor: pointer; 
-    font-size: 0.8rem; 
-    font-weight: bold; 
-    color: white;
+.inputGroupRow input[type="file"]::file-selector-button:hover {
+  background: rgba(210, 210, 213, 0.95);
 }
 
-.btnEditar { 
-    background: #5f6368; 
+/* =========================================================
+   BOTÃO SALVAR
+========================================================= */
+
+.btnSalvar {
+  position: relative;
+
+  z-index: 2;
+
+  align-self: flex-end;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-width: 190px;
+  min-height: 48px;
+
+  padding: 0 26px;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(255, 255, 255, 0.6);
+
+  border-radius: 999px;
+
+  color: #ffffff;
+
+  font-size: 0.88rem;
+
+  font-weight: 700;
+
+  letter-spacing: -0.025em;
+
+  cursor: pointer;
+
+  background:
+    radial-gradient(
+      ellipse at 22% 18%,
+      rgba(255, 255, 255, 0.38),
+      transparent 42%
+    ),
+    linear-gradient(
+      105deg,
+      #fc6701 0%,
+      #fc6701 38%,
+      #ff9a58 64%,
+      #f7bf9a 78%,
+      rgba(255, 255, 255, 0.95) 100%
+    );
+
+  box-shadow:
+    0 9px 18px rgba(252, 103, 1, 0.16),
+    inset 0 1px 2px rgba(255, 255, 255, 0.8);
+
+  transition:
+    transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 300ms ease;
 }
 
-.btnDeletar { 
-    background: #FF5A5F; 
+.btnSalvar:hover {
+  transform: translateY(-2px);
+
+  box-shadow: 0 14px 25px rgba(252, 103, 1, 0.2);
 }
 
-/* RESPONSIVIDADE DO FORMULÁRIO E CARDS */
-@media (max-width: 768px) {
-  .headerSecao {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
+/* =========================================================
+   GRID DOS EVENTOS
+========================================================= */
+
+.gridEventos {
+  display: grid;
+
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  gap: 24px;
+
+  width: 100%;
+}
+
+/* Mensagem vazia */
+
+.gridEventos > p {
+  grid-column: 1 / -1;
+
+  margin: 60px 0;
+
+  color: #848487;
+
+  font-size: 1rem;
+
+  font-weight: 500;
+
+  text-align: center;
+}
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.cardEvento {
+  position: relative;
+
+  display: flex;
+
+  flex-direction: column;
+
+  min-width: 0;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(255, 255, 255, 0.42);
+
+  border-radius: 30px;
+
+  background: linear-gradient(
+    145deg,
+    rgba(220, 220, 222, 0.8),
+    rgba(238, 238, 239, 0.72)
+  );
+
+  box-shadow:
+    0 16px 35px rgba(55, 55, 58, 0.065),
+    inset 0 1px 1px rgba(255, 255, 255, 0.62);
+
+  transition:
+    transform 340ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 340ms ease;
+}
+
+.cardEvento:hover {
+  transform: translateY(-6px);
+
+  box-shadow: 0 24px 46px rgba(55, 55, 58, 0.1);
+}
+
+/* =========================================================
+   IMAGEM
+========================================================= */
+
+.imgEvento {
+  display: block;
+
+  width: 100%;
+  height: 215px;
+
+  object-fit: cover;
+
+  background: #dedede;
+}
+
+/* =========================================================
+   CORPO DO CARD
+========================================================= */
+
+.cardBody {
+  display: flex;
+
+  flex: 1;
+  flex-direction: column;
+
+  padding: 25px 25px 24px;
+}
+
+/* =========================================================
+   BADGE
+========================================================= */
+
+.badge {
+  position: relative;
+
+  align-self: flex-start;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-height: 29px;
+
+  margin-bottom: 17px;
+
+  padding: 0 14px;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(255, 255, 255, 0.62);
+
+  border-radius: 999px;
+
+  color: #ffffff;
+
+  font-size: 0.64rem;
+
+  line-height: 1;
+
+  font-weight: 800;
+
+  letter-spacing: 0.03em;
+
+  background: linear-gradient(
+    105deg,
+    #fc6701 0%,
+    #fc6701 44%,
+    #ff9c5d 72%,
+    rgba(255, 255, 255, 0.9) 100%
+  );
+
+  box-shadow:
+    0 6px 12px rgba(252, 103, 1, 0.14),
+    inset 0 1px 1px rgba(255, 255, 255, 0.72);
+}
+
+/* =========================================================
+   TÍTULO DO EVENTO
+========================================================= */
+
+.cardBody h3 {
+  margin: 0 0 10px;
+
+  color: #6c6c6f;
+
+  font-size: 1.42rem;
+
+  line-height: 1.05;
+
+  font-weight: 700;
+
+  letter-spacing: -0.045em;
+}
+
+/* =========================================================
+   DATA
+========================================================= */
+
+.dataTag {
+  margin: 0 0 14px;
+
+  color: #88888b;
+
+  font-size: 0.76rem;
+
+  line-height: 1.4;
+
+  font-weight: 600;
+
+  letter-spacing: -0.015em;
+}
+
+/* =========================================================
+   DESCRIÇÃO
+========================================================= */
+
+.descricao {
+  flex: 1;
+
+  margin: 0 0 23px;
+
+  color: #707073;
+
+  font-size: 0.88rem;
+
+  line-height: 1.45;
+
+  font-weight: 500;
+
+  letter-spacing: -0.018em;
+}
+
+/* =========================================================
+   ÁREA DE AÇÕES
+========================================================= */
+
+.acoesBase {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  margin-top: auto;
+
+  padding-top: 18px;
+
+  border-top: 1px solid rgba(100, 100, 104, 0.08);
+}
+
+/* =========================================================
+   ACESSAR LINK
+========================================================= */
+
+.btnLink {
+  position: relative;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-height: 38px;
+
+  padding: 0 18px;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(255, 255, 255, 0.58);
+
+  border-radius: 999px;
+
+  color: #ffffff;
+
+  font-size: 0.75rem;
+
+  font-weight: 700;
+
+  letter-spacing: -0.02em;
+
+  text-decoration: none;
+
+  background: linear-gradient(
+    105deg,
+    #fc6701 0%,
+    #fc6701 45%,
+    #ffa46a 75%,
+    rgba(255, 255, 255, 0.92) 100%
+  );
+
+  box-shadow:
+    0 7px 14px rgba(252, 103, 1, 0.14),
+    inset 0 1px 1px rgba(255, 255, 255, 0.75);
+
+  transition:
+    transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 260ms ease;
+}
+
+.btnLink:hover {
+  transform: translateY(-2px);
+
+  box-shadow: 0 10px 18px rgba(252, 103, 1, 0.18);
+}
+
+/* =========================================================
+   AÇÕES ADMIN
+========================================================= */
+
+.acoesAdmin {
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  margin-left: auto;
+}
+
+/* =========================================================
+   EDITAR E EXCLUIR
+========================================================= */
+
+.btnEditar,
+.btnDeletar {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-height: 35px;
+
+  padding: 0 13px;
+
+  border: 1px solid rgba(255, 255, 255, 0.45);
+
+  border-radius: 999px;
+
+  font-size: 0.7rem;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 220ms ease,
+    background 220ms ease;
+}
+
+/* Editar */
+
+.btnEditar {
+  color: #666669;
+
+  background: rgba(255, 255, 255, 0.55);
+
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.85);
+}
+
+.btnEditar:hover {
+  background: rgba(255, 255, 255, 0.8);
+
+  transform: translateY(-1px);
+}
+
+/* Excluir */
+
+.btnDeletar {
+  color: #ffffff;
+
+  background: linear-gradient(135deg, #ee635f, #f38b86);
+
+  box-shadow: 0 5px 10px rgba(220, 80, 75, 0.12);
+}
+
+.btnDeletar:hover {
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   DESKTOP MENOR
+========================================================= */
+
+@media (max-width: 1100px) {
+  .mainContent {
+    width: calc(100% - 48px);
+
+    padding-top: 90px;
   }
-  
+
+  .gridEventos {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 768px) {
+  .mainContent {
+    width: calc(100% - 32px);
+
+    padding: 75px 0 100px;
+  }
+
+  /* Header */
+
+  .headerSecao {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 25px;
+
+    margin-bottom: 45px;
+  }
+
+  .headerSecao h2 {
+    font-size: clamp(2.7rem, 10vw, 4rem);
+  }
+
+  /* Form */
+
+  .formCard {
+    padding: 30px 24px;
+
+    border-radius: 28px;
+  }
+
   .inputGroupRow {
     flex-direction: column;
-    gap: 1rem;
+
+    gap: 12px;
+  }
+
+  .inputGroupRow select {
+    flex: 1;
+  }
+
+  .btnSalvar {
+    align-self: stretch;
+
+    width: 100%;
+  }
+
+  /* Cards */
+
+  .gridEventos {
+    grid-template-columns: 1fr;
+
+    gap: 20px;
+  }
+
+  .cardEvento {
+    max-width: 600px;
+
+    width: 100%;
+
+    margin: 0 auto;
   }
 
   .acoesBase {
-    flex-direction: column;
     align-items: stretch;
-    gap: 1rem;
-    text-align: center;
+
+    flex-direction: column;
+  }
+
+  .btnLink {
+    width: 100%;
+  }
+
+  .acoesAdmin {
+    width: 100%;
+
+    margin-left: 0;
+  }
+
+  .btnEditar,
+  .btnDeletar {
+    flex: 1;
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+  .mainContent {
+    width: calc(100% - 24px);
+
+    padding: 60px 0 80px;
+  }
+
+  .headerSecao h2 {
+    font-size: 2.65rem;
+  }
+
+  .btnNovo {
+    width: 100%;
+  }
+
+  .formCard {
+    padding: 26px 18px;
+
+    border-radius: 24px;
+  }
+
+  .formCard h3 {
+    font-size: 1.7rem;
+  }
+
+  .cardEvento {
+    border-radius: 26px;
+  }
+
+  .imgEvento {
+    height: 190px;
+  }
+
+  .cardBody {
+    padding: 22px 20px;
+  }
+
+  .cardBody h3 {
+    font-size: 1.3rem;
+  }
+}
+
+/* =========================================================
+   ACESSIBILIDADE
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .btnNovo,
+  .btnSalvar,
+  .btnLink,
+  .cardEvento,
+  .btnEditar,
+  .btnDeletar {
+    transition: none;
   }
 }

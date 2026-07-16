@@ -1,90 +1,712 @@
+/* =========================================================
+   NETGI — CADASTRO
+   Reprodução visual baseada no Figma
+========================================================= */
+
+/* =========================================================
+   PÁGINA
+========================================================= */
+
 .pageContainer {
   display: flex;
   flex-direction: column;
+
+  width: 100%;
   min-height: 100vh;
-  background-color: #fafafa;
+
+  overflow-x: hidden;
+
+  color: #707073;
+
+  background: linear-gradient(180deg, #f8f8f8 0%, #f5f5f5 52%, #f7f7f7 100%);
 }
+
+/* =========================================================
+   CONTEÚDO
+========================================================= */
 
 .mainContent {
+  position: relative;
+
+  display: grid;
+
   flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 4rem 1rem;
+
+  place-items: center;
+
+  width: 100%;
+
+  min-height: 950px;
+
+  padding: 70px 24px 150px;
+
+  overflow: hidden;
 }
+
+/* =========================================================
+   FORM WRAPPER
+========================================================= */
 
 .formWrapper {
-  background: white;
-  padding: 3rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  width: 100%;
-  max-width: 450px; /* Um pouco mais largo para acomodar mais campos confortavelmente */
+  position: relative;
+
+  z-index: 5;
+
+  width: min(660px, 100%);
+
+  margin: 0 auto;
 }
 
-.formWrapper h2 {
-  text-align: center;
-  color: #333;
-  margin-bottom: 2rem;
-  font-size: 1.8rem;
+/* =========================================================
+   TÍTULO
+========================================================= */
+
+.titleRow {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 17px;
+
+  margin-bottom: 72px;
 }
+
+.titleRow h1 {
+  margin: 0;
+
+  color: #6c6c6f;
+
+  font-size: clamp(3.4rem, 6vw, 5.5rem);
+
+  line-height: 0.92;
+
+  font-weight: 700;
+
+  letter-spacing: -0.065em;
+}
+
+/* =========================================================
+   ÍCONE TÍTULO
+========================================================= */
+
+.titleIcon {
+  width: 82px;
+  height: 60px;
+
+  object-fit: contain;
+
+  filter: drop-shadow(0 10px 10px rgba(70, 70, 73, 0.14));
+
+  pointer-events: none;
+
+  user-select: none;
+}
+
+/* =========================================================
+   FORM
+========================================================= */
 
 .form {
   display: flex;
+
   flex-direction: column;
-  gap: 1.2rem;
+
+  width: 100%;
+
+  gap: 14px;
 }
+
+/* =========================================================
+   INPUT
+========================================================= */
 
 .inputGroup {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
+  position: relative;
 
-.inputGroup label {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #555;
+  display: block;
+
+  width: 100%;
 }
 
 .inputGroup input {
-  padding: 0.8rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 1rem;
+  width: 100%;
+
+  height: 64px;
+
+  padding: 0 28px;
+
+  border: 1px solid rgba(255, 255, 255, 0.55);
+
+  border-radius: 999px;
+
   outline: none;
+
+  color: #69696c;
+
+  font-size: 1.08rem;
+
+  font-weight: 600;
+
+  letter-spacing: -0.025em;
+
+  background: linear-gradient(
+    180deg,
+    rgba(230, 230, 232, 0.96),
+    rgba(220, 220, 222, 0.92)
+  );
+
+  box-shadow:
+    0 9px 20px rgba(65, 65, 69, 0.04),
+    inset 0 1px 1px rgba(255, 255, 255, 0.9);
+
+  backdrop-filter: blur(16px);
+
+  -webkit-backdrop-filter: blur(16px);
+
+  transition:
+    transform 240ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 240ms ease,
+    box-shadow 240ms ease;
 }
+
+/* =========================================================
+   PLACEHOLDER
+========================================================= */
+
+.inputGroup input::placeholder {
+  color: #757578;
+
+  opacity: 0.9;
+}
+
+/* =========================================================
+   FOCUS
+========================================================= */
 
 .inputGroup input:focus {
-  border-color: #ff6b00;
+  transform: translateY(-1px);
+
+  border-color: rgba(252, 103, 1, 0.24);
+
+  box-shadow:
+    0 0 0 5px rgba(252, 103, 1, 0.05),
+    0 12px 25px rgba(65, 65, 69, 0.06),
+    inset 0 1px 1px rgba(255, 255, 255, 0.95);
 }
 
-.submitBtn {
-  background-color: #ff6b00;
-  color: white;
-  border: none;
-  padding: 1rem;
-  border-radius: 4px;
-  font-size: 1rem;
-  font-weight: bold;
+/* =========================================================
+   SENHA
+========================================================= */
+
+.passwordGroup input {
+  padding-right: 82px;
+}
+
+/* =========================================================
+   OLHO
+========================================================= */
+
+.eyeButton {
+  position: absolute;
+
+  z-index: 4;
+
+  top: 50%;
+  right: 12px;
+
+  display: grid;
+
+  place-items: center;
+
+  width: 44px;
+  height: 44px;
+
+  padding: 0;
+
+  transform: translateY(-50%);
+
+  border: 1px solid rgba(255, 255, 255, 0.65);
+
+  border-radius: 50%;
+
+  color: #aaa;
+
+  font-size: 1.08rem;
+
   cursor: pointer;
-  margin-top: 1rem;
-  transition: background 0.3s;
+
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.74),
+    rgba(218, 218, 220, 0.42)
+  );
+
+  box-shadow:
+    0 5px 12px rgba(60, 60, 63, 0.06),
+    inset 0 1px 1px rgba(255, 255, 255, 0.9);
+
+  backdrop-filter: blur(12px);
+
+  -webkit-backdrop-filter: blur(12px);
+
+  transition:
+    color 220ms ease,
+    transform 220ms ease;
 }
 
-.submitBtn:hover {
-  background-color: #e65c00;
+.eyeButton:hover {
+  color: #fc6701;
+
+  transform: translateY(-50%) scale(1.05);
 }
+
+.eyeButton:active {
+  transform: translateY(-50%) scale(0.94);
+}
+
+/* =========================================================
+   LOGIN LINK
+========================================================= */
 
 .loginLink {
-  text-align: center;
-  margin-top: 1.5rem;
-  font-size: 0.9rem;
-  color: #666;
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 5px;
+
+  margin-top: 70px;
+
+  color: #7b7b7e;
+
+  font-size: 1rem;
+
+  font-weight: 500;
+
+  letter-spacing: -0.025em;
 }
 
 .loginLink a {
-  color: #ff6b00;
+  position: relative;
+
+  color: #fc6701;
+
+  font-weight: 750;
+
   text-decoration: none;
-  font-weight: bold;
+}
+
+.loginLink a::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  bottom: -4px;
+
+  width: 0;
+  height: 1px;
+
+  background: #fc6701;
+
+  transition: width 250ms ease;
+}
+
+.loginLink a:hover::after {
+  width: 100%;
+}
+
+/* =========================================================
+   BOTÃO CADASTRO
+========================================================= */
+
+.submitBtn {
+  position: relative;
+
+  isolation: isolate;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+
+  height: 62px;
+
+  margin-top: 2px;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(255, 255, 255, 0.8);
+
+  border-radius: 999px;
+
+  color: #ffffff;
+
+  cursor: pointer;
+
+  background: linear-gradient(
+    102deg,
+    #fc6701 0%,
+    #fc6701 43%,
+    rgba(255, 141, 65, 0.94) 56%,
+    rgba(255, 190, 147, 0.72) 67%,
+    rgba(255, 255, 255, 0.82) 82%,
+    rgba(226, 226, 228, 0.86) 100%
+  );
+
+  box-shadow:
+    0 20px 30px rgba(74, 74, 78, 0.18),
+    0 1px 0 rgba(255, 255, 255, 0.98) inset,
+    0 -9px 18px rgba(123, 123, 128, 0.07) inset;
+
+  backdrop-filter: blur(16px) saturate(160%);
+
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+
+  transition:
+    transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 280ms ease;
+}
+
+/* =========================================================
+   REFLEXO DO BOTÃO
+========================================================= */
+
+.submitBtn::before {
+  content: "";
+
+  position: absolute;
+
+  z-index: -1;
+
+  top: 1px;
+  left: 3%;
+
+  width: 90%;
+  height: 49%;
+
+  border-radius: inherit;
+
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.42), transparent);
+
+  pointer-events: none;
+}
+
+.submitBtn span {
+  position: relative;
+
+  z-index: 2;
+
+  font-size: 1rem;
+
+  font-weight: 800;
+
+  letter-spacing: 0.01em;
+}
+
+.submitBtn:hover:not(:disabled) {
+  transform: translateY(-3px) scale(1.008);
+
+  box-shadow: 0 25px 36px rgba(74, 74, 78, 0.22);
+}
+
+.submitBtn:active:not(:disabled) {
+  transform: scale(0.99);
+}
+
+.submitBtn:disabled {
+  opacity: 0.7;
+
+  cursor: wait;
+}
+
+/* =========================================================
+   FEEDBACK ERRO
+========================================================= */
+
+.feedbackError {
+  padding: 12px 18px;
+
+  border: 1px solid rgba(255, 255, 255, 0.72);
+
+  border-radius: 18px;
+
+  color: #b84440;
+
+  font-size: 0.84rem;
+
+  font-weight: 600;
+
+  text-align: center;
+
+  background: rgba(255, 224, 220, 0.68);
+}
+
+/* =========================================================
+   FEEDBACK SUCESSO
+========================================================= */
+
+.feedbackSuccess {
+  padding: 12px 18px;
+
+  border: 1px solid rgba(255, 255, 255, 0.72);
+
+  border-radius: 18px;
+
+  color: #248150;
+
+  font-size: 0.84rem;
+
+  font-weight: 600;
+
+  text-align: center;
+
+  background: rgba(218, 245, 230, 0.72);
+}
+
+/* =========================================================
+   DECORAÇÕES
+========================================================= */
+
+.decorIcon {
+  position: absolute;
+
+  z-index: 2;
+
+  display: block;
+
+  width: 100px;
+  height: 100px;
+
+  object-fit: contain;
+
+  pointer-events: none;
+
+  user-select: none;
+
+  filter: drop-shadow(0 17px 13px rgba(65, 65, 69, 0.16));
+}
+
+/* Superior esquerda */
+
+.decorTopLeft {
+  top: 8%;
+
+  left: clamp(30px, 8vw, 140px);
+
+  transform: rotate(-4deg);
+}
+
+/* Meio esquerda */
+
+.decorLeft {
+  top: 52%;
+
+  left: clamp(40px, 13vw, 220px);
+
+  transform: rotate(-8deg);
+}
+
+/* Direita */
+
+.decorRight {
+  top: 30%;
+
+  right: clamp(35px, 12vw, 210px);
+
+  transform: rotate(6deg);
+}
+
+/* =========================================================
+   SCREEN READER
+========================================================= */
+
+.srOnly {
+  position: absolute;
+
+  width: 1px;
+  height: 1px;
+
+  padding: 0;
+  margin: -1px;
+
+  overflow: hidden;
+
+  clip: rect(0, 0, 0, 0);
+
+  white-space: nowrap;
+
+  border: 0;
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 850px) {
+  .mainContent {
+    min-height: 850px;
+
+    padding: 55px 24px 110px;
+  }
+
+  .formWrapper {
+    width: min(580px, 100%);
+  }
+
+  .titleRow {
+    margin-bottom: 55px;
+  }
+
+  .decorIcon {
+    width: 70px;
+    height: 70px;
+
+    opacity: 0.45;
+  }
+
+  .decorTopLeft {
+    left: -5px;
+  }
+
+  .decorLeft {
+    left: -15px;
+  }
+
+  .decorRight {
+    right: -10px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 560px) {
+  .mainContent {
+    min-height: 800px;
+
+    padding: 55px 18px 90px;
+  }
+
+  .titleRow {
+    gap: 10px;
+
+    margin-bottom: 45px;
+  }
+
+  .titleRow h1 {
+    font-size: clamp(3rem, 14vw, 4rem);
+  }
+
+  .titleIcon {
+    width: 62px;
+    height: 48px;
+  }
+
+  .form {
+    gap: 12px;
+  }
+
+  .inputGroup input {
+    height: 56px;
+
+    padding: 0 21px;
+
+    font-size: 0.98rem;
+  }
+
+  .passwordGroup input {
+    padding-right: 68px;
+  }
+
+  .eyeButton {
+    right: 10px;
+
+    width: 38px;
+    height: 38px;
+  }
+
+  .loginLink {
+    margin-top: 55px;
+
+    font-size: 0.9rem;
+  }
+
+  .submitBtn {
+    height: 57px;
+  }
+
+  .decorIcon {
+    width: 58px;
+    height: 58px;
+
+    opacity: 0.25;
+  }
+
+  .decorTopLeft {
+    top: 5%;
+
+    left: -12px;
+  }
+
+  .decorLeft {
+    left: -18px;
+  }
+
+  .decorRight {
+    right: -17px;
+  }
+}
+
+/* =========================================================
+   TELAS PEQUENAS
+========================================================= */
+
+@media (max-width: 380px) {
+  .titleRow h1 {
+    font-size: 2.8rem;
+  }
+
+  .titleIcon {
+    width: 54px;
+    height: 42px;
+  }
+
+  .loginLink {
+    flex-direction: column;
+
+    gap: 7px;
+  }
+}
+
+/* =========================================================
+   AUTOFILL
+========================================================= */
+
+.inputGroup input:-webkit-autofill,
+.inputGroup input:-webkit-autofill:hover,
+.inputGroup input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #69696c;
+
+  -webkit-box-shadow: 0 0 0 1000px #e4e4e6 inset;
+
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* =========================================================
+   ACESSIBILIDADE
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .inputGroup input,
+  .eyeButton,
+  .submitBtn,
+  .loginLink a::after {
+    transition: none;
+  }
 }
