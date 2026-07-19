@@ -1,139 +1,708 @@
+/* =========================================================
+   NETGI — GERENCIAR
+   Gerenciar.module.css
+
+   Direção visual:
+   - Mesma linguagem visual do Header e Home
+   - Fundo cinza muito claro
+   - Painel administrativo elegante
+   - Cards discretos e espaçosos
+   - Liquid Glass pontual
+   - Aprovar em verde
+   - Rejeitar em cinza
+========================================================= */
+
+/* =========================================================
+   PÁGINA
+========================================================= */
+
 .pageContainer {
   display: flex;
   flex-direction: column;
+
+  width: 100%;
   min-height: 100vh;
+
+  overflow-x: hidden;
+
+  color: #707073;
+
+  background: linear-gradient(180deg, #f8f8f8 0%, #f5f5f5 50%, #f7f7f7 100%);
 }
+
+/* =========================================================
+   CONTEÚDO PRINCIPAL
+========================================================= */
 
 .mainContent {
-  flex: 1;
+  position: relative;
+
   display: flex;
+
+  flex: 1;
+
   justify-content: center;
-  padding: 4rem 1rem;
+
+  width: 100%;
+
+  padding: 110px 32px 150px;
 }
+
+/* =========================================================
+   PAINEL ADMINISTRATIVO
+========================================================= */
 
 .adminPanel {
-  background: white;
-  padding: 2.5rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  position: relative;
+
   width: 100%;
-  max-width: 800px;
+
+  max-width: 1120px;
+
+  min-height: 500px;
+
+  padding: 55px 58px;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(255, 255, 255, 0.44);
+
+  border-radius: 38px;
+
+  background: linear-gradient(
+    145deg,
+    rgba(221, 221, 223, 0.82),
+    rgba(239, 239, 240, 0.74)
+  );
+
+  box-shadow:
+    0 22px 48px rgba(55, 55, 58, 0.075),
+    inset 0 1px 1px rgba(255, 255, 255, 0.68);
+
+  backdrop-filter: blur(24px) saturate(125%);
+
+  -webkit-backdrop-filter: blur(24px) saturate(125%);
 }
+
+/* =========================================================
+   REFLEXO SUPERIOR DO PAINEL
+========================================================= */
+
+.adminPanel::before {
+  content: "";
+
+  position: absolute;
+
+  top: 1px;
+  left: 5%;
+
+  width: 90%;
+  height: 35%;
+
+  border-radius: inherit;
+
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.18), transparent);
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   TÍTULO
+========================================================= */
 
 .adminPanel h2 {
-  color: #333;
-  margin-bottom: 2rem;
-  border-bottom: 2px solid #f0f0f0;
-  padding-bottom: 1rem;
+  position: relative;
+
+  z-index: 2;
+
+  margin: 0 0 45px;
+
+  padding: 0;
+
+  border: none;
+
+  color: #707073;
+
+  font-size: clamp(2.8rem, 5vw, 4.8rem);
+
+  line-height: 0.95;
+
+  font-weight: 700;
+
+  letter-spacing: -0.06em;
 }
+
+/* =========================================================
+   MENSAGEM VAZIA
+========================================================= */
 
 .emptyMessage {
-  color: #777;
-  font-style: italic;
+  position: relative;
+
+  z-index: 2;
+
+  display: grid;
+
+  place-items: center;
+
+  min-height: 260px;
+
+  margin: 0;
+
+  padding: 40px 20px;
+
+  border: 1px solid rgba(255, 255, 255, 0.35);
+
+  border-radius: 28px;
+
+  color: #858588;
+
+  font-size: 0.95rem;
+
+  line-height: 1.5;
+
+  font-weight: 500;
+
+  font-style: normal;
+
   text-align: center;
-  padding: 2rem 0;
+
+  background: rgba(255, 255, 255, 0.22);
+
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.42);
 }
+
+/* =========================================================
+   LISTA
+========================================================= */
 
 .userList {
+  position: relative;
+
+  z-index: 2;
+
   display: flex;
+
   flex-direction: column;
-  gap: 1rem;
+
+  gap: 15px;
+
+  width: 100%;
 }
 
+/* =========================================================
+   CARD DO USUÁRIO
+========================================================= */
+
 .userCard {
+  position: relative;
+
   display: flex;
-  justify-content: space-between;
+
   align-items: center;
-  background-color: #f9f9f9;
-  padding: 1.5rem;
-  border-radius: 8px;
-  border: 1px solid #eee;
+  justify-content: space-between;
+
+  gap: 30px;
+
+  width: 100%;
+
+  min-height: 110px;
+
+  padding: 22px 24px;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(255, 255, 255, 0.48);
+
+  border-radius: 25px;
+
+  background: linear-gradient(
+    145deg,
+    rgba(245, 245, 246, 0.62),
+    rgba(225, 225, 227, 0.65)
+  );
+
+  box-shadow:
+    0 11px 24px rgba(55, 55, 58, 0.05),
+    inset 0 1px 1px rgba(255, 255, 255, 0.72);
+
+  transition:
+    transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 300ms ease;
 }
+
+/* =========================================================
+   HOVER DO CARD
+========================================================= */
+
+.userCard:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 17px 32px rgba(55, 55, 58, 0.08),
+    inset 0 1px 1px rgba(255, 255, 255, 0.76);
+}
+
+/* =========================================================
+   DADOS DO USUÁRIO
+========================================================= */
 
 .userData {
   display: flex;
+
+  flex: 1;
+
   flex-direction: column;
-  gap: 0.3rem;
+
+  gap: 7px;
+
+  min-width: 0;
 }
+
+/* =========================================================
+   NOME
+========================================================= */
 
 .userData strong {
-  font-size: 1.1rem;
-  color: #444;
+  overflow: hidden;
+
+  color: #666669;
+
+  font-size: 1.18rem;
+
+  line-height: 1.1;
+
+  font-weight: 750;
+
+  letter-spacing: -0.035em;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
 }
 
+/* =========================================================
+   INFORMAÇÕES DO USUÁRIO
+========================================================= */
+
 .userData span {
-  font-size: 0.9rem;
-  color: #777;
+  overflow: hidden;
+
+  color: #858588;
+
+  font-size: 0.84rem;
+
+  line-height: 1.35;
+
+  font-weight: 500;
+
+  letter-spacing: -0.015em;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
 }
+
+/* =========================================================
+   ÁREA DE AÇÕES
+========================================================= */
 
 .userActions {
   display: flex;
-  gap: 1rem;
+
+  align-items: center;
+
+  flex-shrink: 0;
+
+  gap: 9px;
 }
 
-.btnApprove, .btnReject {
-  padding: 0.6rem 1.2rem;
-  border: none;
-  border-radius: 4px;
-  font-weight: bold;
+/* =========================================================
+   BOTÕES BASE
+========================================================= */
+
+.btnApprove,
+.btnReject {
+  position: relative;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-width: 118px;
+
+  min-height: 44px;
+
+  padding: 0 20px;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(255, 255, 255, 0.6);
+
+  border-radius: 999px;
+
+  font-size: 0.78rem;
+
+  line-height: 1;
+
+  font-weight: 750;
+
+  letter-spacing: -0.02em;
+
   cursor: pointer;
-  transition: opacity 0.2s;
+
+  backdrop-filter: blur(14px) saturate(150%);
+
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+
+  transition:
+    transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 260ms ease,
+    filter 260ms ease,
+    color 260ms ease;
 }
+
+/* =========================================================
+   REFLEXO DOS BOTÕES
+========================================================= */
+
+.btnApprove::before,
+.btnReject::before {
+  content: "";
+
+  position: absolute;
+
+  top: 1px;
+  left: 9%;
+
+  width: 78%;
+  height: 44%;
+
+  border-radius: inherit;
+
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.4), transparent);
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   APROVAR — VERDE LIQUID GLASS
+========================================================= */
 
 .btnApprove {
-  background-color: #1e8e3e;
-  color: white;
+  color: #ffffff;
+
+  background:
+    radial-gradient(
+      ellipse at 22% 18%,
+      rgba(255, 255, 255, 0.38),
+      transparent 42%
+    ),
+    linear-gradient(
+      105deg,
+      #238b45 0%,
+      #2fa958 40%,
+      #60c77c 68%,
+      rgba(255, 255, 255, 0.94) 100%
+    );
+
+  box-shadow:
+    0 8px 16px rgba(35, 139, 69, 0.18),
+    0 4px 9px rgba(68, 68, 70, 0.06),
+    inset 0 1px 2px rgba(255, 255, 255, 0.78);
 }
+
+/* =========================================================
+   REJEITAR — CINZA LIQUID GLASS
+========================================================= */
 
 .btnReject {
-  background-color: #d93025;
-  color: white;
+  color: #68686b;
+
+  background:
+    radial-gradient(
+      ellipse at 22% 18%,
+      rgba(255, 255, 255, 0.42),
+      transparent 42%
+    ),
+    linear-gradient(
+      105deg,
+      #c8c8ca 0%,
+      #d6d6d8 42%,
+      #e5e5e7 70%,
+      rgba(255, 255, 255, 0.96) 100%
+    );
+
+  box-shadow:
+    0 8px 16px rgba(70, 70, 73, 0.09),
+    0 4px 9px rgba(68, 68, 70, 0.05),
+    inset 0 1px 2px rgba(255, 255, 255, 0.88);
 }
 
-.btnApprove:hover, .btnReject:hover {
-  opacity: 0.8;
+/* =========================================================
+   HOVER DOS BOTÕES
+========================================================= */
+
+.btnApprove:hover,
+.btnReject:hover {
+  opacity: 1;
+
+  transform: translateY(-2px);
+
+  filter: saturate(1.04);
 }
 
-/* =========================================
-   RESPONSIVIDADE - PÁGINA GERENCIAR
-   ========================================= */
+/* =========================================================
+   HOVER APROVAR
+========================================================= */
 
-@media (max-width: 768px) {
-  /* Força o card a virar uma coluna */
-  .userCard {
-    display: flex;
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    gap: 1rem;
-    padding: 1.5rem 1rem;
+.btnApprove:hover {
+  box-shadow:
+    0 13px 22px rgba(35, 139, 69, 0.24),
+    0 5px 10px rgba(68, 68, 70, 0.05),
+    inset 0 1px 2px rgba(255, 255, 255, 0.85);
+}
+
+/* =========================================================
+   HOVER REJEITAR
+========================================================= */
+
+.btnReject:hover {
+  color: #555558;
+
+  box-shadow:
+    0 13px 22px rgba(70, 70, 73, 0.13),
+    0 5px 10px rgba(68, 68, 70, 0.05),
+    inset 0 1px 2px rgba(255, 255, 255, 0.95);
+}
+
+/* =========================================================
+   ACTIVE
+========================================================= */
+
+.btnApprove:active,
+.btnReject:active {
+  transform: scale(0.97);
+}
+
+/* =========================================================
+   FOCUS
+========================================================= */
+
+.btnApprove:focus-visible {
+  outline: none;
+
+  box-shadow:
+    0 0 0 4px rgba(47, 169, 88, 0.14),
+    0 13px 22px rgba(35, 139, 69, 0.2);
+}
+
+.btnReject:focus-visible {
+  outline: none;
+
+  box-shadow:
+    0 0 0 4px rgba(110, 110, 115, 0.1),
+    0 13px 22px rgba(70, 70, 73, 0.12);
+}
+
+/* =========================================================
+   DESKTOP MENOR
+========================================================= */
+
+@media (max-width: 1050px) {
+  .mainContent {
+    padding: 90px 24px 120px;
   }
 
-  /* Garante que os dados (especialmente o e-mail) não quebrem a tela */
+  .adminPanel {
+    padding: 45px 38px;
+
+    border-radius: 34px;
+  }
+
+  .userCard {
+    gap: 20px;
+  }
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 768px) {
+  .mainContent {
+    padding: 75px 18px 100px;
+  }
+
+  .adminPanel {
+    padding: 38px 25px;
+
+    border-radius: 30px;
+  }
+
+  .adminPanel h2 {
+    margin-bottom: 35px;
+
+    font-size: clamp(2.6rem, 10vw, 3.8rem);
+  }
+
+  /* =======================================================
+     CARD EM COLUNA
+  ======================================================= */
+
+  .userCard {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 20px;
+
+    min-height: auto;
+
+    padding: 24px 21px;
+
+    border-radius: 23px;
+  }
+
+  /* =======================================================
+     DADOS
+  ======================================================= */
+
   .userData {
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
+  }
+
+  .userData strong {
+    white-space: normal;
+
+    overflow-wrap: anywhere;
   }
 
   .userData span {
-    word-break: break-all; /* Quebra o e-mail no meio se for muito longo */
+    overflow: visible;
+
+    word-break: break-word;
+
+    overflow-wrap: anywhere;
+
     white-space: normal;
   }
 
-  /* Faz a área dos botões ocupar a largura inteira do card na parte de baixo */
+  /* =======================================================
+     BOTÕES
+  ======================================================= */
+
   .userActions {
     display: flex;
+
     width: 100%;
+
     justify-content: space-between;
-    gap: 0.8rem;
+
+    gap: 10px;
   }
 
-  /* Estica os botões para dividirem o espaço 50/50 e ficarem fáceis de tocar */
   .userActions button {
     flex: 1;
-    padding: 0.8rem 0;
+
+    min-width: 0;
+
+    min-height: 48px;
+
+    padding: 0 16px;
+
     margin: 0;
-    font-size: 1rem;
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 500px) {
+  .mainContent {
+    padding: 60px 12px 85px;
+  }
+
+  .adminPanel {
+    padding: 32px 16px;
+
+    border-radius: 26px;
+  }
+
+  .adminPanel h2 {
+    margin-bottom: 28px;
+
+    font-size: 2.65rem;
+  }
+
+  .emptyMessage {
+    min-height: 200px;
+
+    padding: 30px 15px;
+
+    border-radius: 22px;
+  }
+
+  .userList {
+    gap: 12px;
+  }
+
+  .userCard {
+    padding: 21px 17px;
+
+    border-radius: 21px;
+  }
+
+  .userData strong {
+    font-size: 1.08rem;
+  }
+
+  .userData span {
+    font-size: 0.8rem;
+  }
+
+  .btnApprove,
+  .btnReject {
+    min-height: 46px;
+
+    font-size: 0.74rem;
+  }
+}
+
+/* =========================================================
+   MOBILE PEQUENO
+========================================================= */
+
+@media (max-width: 360px) {
+  .adminPanel {
+    padding: 28px 13px;
+  }
+
+  .adminPanel h2 {
+    font-size: 2.3rem;
+  }
+
+  .userActions {
+    flex-direction: column;
+  }
+
+  .userActions button {
+    width: 100%;
+  }
+}
+
+/* =========================================================
+   ACESSIBILIDADE
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .userCard,
+  .btnApprove,
+  .btnReject {
+    transition: none;
   }
 }

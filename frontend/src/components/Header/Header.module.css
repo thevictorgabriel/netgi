@@ -212,7 +212,7 @@ a.labStatus:hover {
   background:
     radial-gradient(
       ellipse at 22% 18%,
-      rgba(255, 255, 255, 0.38) 0%,
+      rgb(248, 248, 248) 0%,
       rgba(255, 255, 255, 0) 42%
     ),
     linear-gradient(
@@ -236,20 +236,20 @@ a.labStatus:hover {
 
 .statusClosed {
   background:
-    radial-gradient(ellipse at 22% 18%, #fc6701 0%, rgba(253, 101, 0, 0) 42%),
+    radial-gradient(ellipse at 22% 18%, #f7f6f6 0%, rgba(253, 101, 0, 0) 42%),
     linear-gradient(
       105deg,
-      #fc6701 0%,
-      #fc6701 38%,
-      #ffb17e 62%,
-      #f7bf9a 76%,
+      #6d6c6b 0%,
+      #6d6c6b 38%,
+      #6d6c6b 62%,
+      #6d6c6b 76%,
       rgba(255, 255, 255, 0.986) 100%
     );
 
   box-shadow:
     0 8px 16px rgba(116, 116, 116, 0.021),
     0 4px 9px rgba(68, 68, 70, 0.212),
-    inset 0 1px 2px rgb(255, 115, 0);
+    inset 0 1px 2px rgb(126, 126, 125);
 }
 
 /* =========================================================
